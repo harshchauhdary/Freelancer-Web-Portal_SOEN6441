@@ -1,0 +1,34 @@
+@import model.Project
+@(projects:List[Project])(averageIndex: Float)
+@import model.Project
+@import model.Job
+
+<html>
+    <head>
+        <h1><p align="center">Top projects based on your selected Skill </p></h1>
+    </head>
+    <body>
+        <p>
+            <b>Average Flesh Reading Ease Index: @averageIndex</b><br>
+        @for(p<-projects) {
+            <p>
+        <li>
+            OwnerID: <a href = "@routes.HomeController.user(p.getOwnerID().toString())">@p.getOwnerID</a>
+            <br><br> Time Submitted: @p.getTimeSubmitted()<br><br>
+            Title: <b>@p.getTitle()</b><br><br>
+            Type: @p.getType()<br><br>
+
+            Description: @p.getDesc()<br><br>
+            Flesh Reading Ease Index: <b>@p.getReadabilityIndex()</b> &nbsp &nbsp Education Level: <b>@p.getEducationLevel()</b>
+            &nbsp &nbsp FKGL: <b>@p.getFkglIndex()</b><br><br>
+            Required Skills: &nbsp
+
+            @for(j <- p.getSkills()){
+                <a  href = "@routes.HomeController.skills(j.getJob_id().toString())" >@j.getJob_name()</a> &nbsp &nbsp
+            }
+
+        </li>
+            <br>
+        }
+    </body>
+</html>
