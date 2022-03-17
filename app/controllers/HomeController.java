@@ -55,28 +55,33 @@ public class HomeController extends Controller {
         return ok(views.html.Home.user.render(user));
     }
 
-    public Result stats(String query) throws IOException, ParseException {
-        String encodeQuery = java.net.URLEncoder.encode(query, "UTF-8");
-
-        String url = "https://www.freelancer.com/api/projects/0.1/projects/all/";
-        HashMap<String,String> params = new HashMap<>();
-        params.put("query",encodeQuery);
-        params.put("sort_field","time_updated");
-        params.put("compact","false");
-        params.put("full_description","true");
-        params.put("offset","0");
-        String response1 = GeneralUtil.getJsonResponseFromUrl(url ,params);
-        params.remove("offset");
-        params.put("offset","100");
-        String response2 = GeneralUtil.getJsonResponseFromUrl(url ,params);
-        params.remove("offset");
-        params.put("offset","200");
-        params.put("limit","50");
-        String response3 = GeneralUtil.getJsonResponseFromUrl(url ,params);
+    public Result stats(String query, String single) throws IOException, ParseException {
         List<String> result = new ArrayList<>();
-        result.addAll(GeneralUtil.getDescriptionFromJson(response1));
-        result.addAll(GeneralUtil.getDescriptionFromJson(response2));
-        result.addAll(GeneralUtil.getDescriptionFromJson(response3));
+        if(single.equals("false")) {
+            String encodeQuery = java.net.URLEncoder.encode(query, "UTF-8");
+
+            String url = "https://www.freelancer.com/api/projects/0.1/projects/all/";
+            HashMap<String, String> params = new HashMap<>();
+            params.put("query", encodeQuery);
+            params.put("sort_field", "time_updated");
+            params.put("compact", "false");
+            params.put("full_description", "true");
+            params.put("offset", "0");
+            String response1 = GeneralUtil.getJsonResponseFromUrl(url, params);
+            params.remove("offset");
+            params.put("offset", "100");
+            String response2 = GeneralUtil.getJsonResponseFromUrl(url, params);
+            params.remove("offset");
+            params.put("offset", "200");
+            params.put("limit", "50");
+            String response3 = GeneralUtil.getJsonResponseFromUrl(url, params);
+            result.addAll(GeneralUtil.getDescriptionFromJson(response1));
+            result.addAll(GeneralUtil.getDescriptionFromJson(response2));
+            result.addAll(GeneralUtil.getDescriptionFromJson(response3));
+        }
+        else{
+            result.add(query);
+        }
         Map<String, Long> stats = StatsUtil.getStats(result);
         return ok(views.html.Home.stats.render(StatsUtil.sortStats(stats),query));
     }

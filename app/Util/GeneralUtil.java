@@ -79,7 +79,7 @@ public class GeneralUtil {
         List<CompletableFuture<Project>> collect = (List<CompletableFuture<Project>>) dataArray.stream().map(obj -> CompletableFuture.supplyAsync(() -> {
                     JSONObject jsonObject = (JSONObject) obj;
                     long id = (long) jsonObject.get("owner_id");
-                    String description = (String) jsonObject.get("description");
+                    String description = (String) jsonObject.get("preview_description");
                     String title = (String) jsonObject.get("title");
             List<Job> skills = new ArrayList<>();
                     JSONArray jobArray = (JSONArray) jsonObject.get("jobs");
@@ -112,7 +112,7 @@ public class GeneralUtil {
 
         List<CompletableFuture<String>> collect = (List<CompletableFuture<String>>) dataArray.stream().map(obj -> CompletableFuture.supplyAsync(() -> {
                     JSONObject jsonObject = (JSONObject) obj;
-                    String lcase = (String) jsonObject.get("description");
+                    String lcase = (String) jsonObject.get("preview_description");
                     return lcase.toLowerCase();
                 }, GeneralUtil.executor)
         ).collect(Collectors.toList());

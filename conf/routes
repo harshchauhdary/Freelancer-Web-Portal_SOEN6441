@@ -6,7 +6,7 @@
 GET        /                    controllers.HomeController.index
 GET        /skills/:jobId         controllers.HomeController.skills(jobId:String)
 GET        /user/:userId            controllers.HomeController.user(userId:String)
-GET        /stats/:query        controllers.HomeController.stats(query:String)
+GET        /stats/:query/:single        controllers.HomeController.stats(query:String, single:String)
 
 
 # Map static resources from the /public folder to the /assets URL path
