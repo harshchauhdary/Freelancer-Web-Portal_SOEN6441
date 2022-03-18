@@ -1,0 +1,50 @@
+@*
+* This template is called from the `index` template. This template
+* handles the rendering of the page header and body tags. It takes
+*two arguments, a `List[Project]` for all projects of the search query.
+ and 'Float' value which is the average index of all 10 Projects
+*@
+
+    @import model.Project
+    @import model.Job
+    @import model.Canva
+    @(canvas:List[Canva])
+
+
+    <html>
+
+
+        <head>
+            <h1><p align="center">Top projects </p></h1><br>
+
+        </head>
+        <body>
+            @for(c <- canvas){
+            <p>
+
+        <h1>List of active 10 projects based on @c.getTitle()</h1><br>
+            <b><a href = "@routes.HomeController.stats(c.getTitle(),"false")">Global Stats for @c.getTitle()</a></b><br><br>
+            <b>Average Flesh Reading Ease Index: @c.getAverageIndex()</b><br>
+            @for(p<-c.getProjects()) {
+                <p>
+            <li>
+                OwnerID: <a href = "@routes.HomeController.user(p.getOwnerID().toString())">@p.getOwnerID</a>
+                <br><br> Time Submitted: @p.getTimeSubmitted()<br><br>
+                Title: <b>@p.getTitle()</b><br><br>
+                Type: @p.getType()<br><br>
+
+                Description: @p.getDesc()<br><br>
+                Flesh Reading Ease Index: <b>@p.getReadabilityIndex()</b> &nbsp &nbsp Education Level: <b>@p.getEducationLevel()</b>
+                &nbsp &nbsp FKGL: <b>@p.getFkglIndex()</b><br><br>
+                Required Skills: &nbsp
+
+                @for(j <- p.getSkills()){
+                    <a  href = "@routes.HomeController.skills(j.getJob_id().toString())" >@j.getJob_name()</a> &nbsp &nbsp
+                }
+
+            </li>
+                <br>
+                }}
+
+        </body>
+    </html>
