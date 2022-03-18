@@ -23,7 +23,7 @@
             <p>
 
         <h1>List of active 10 projects based on @c.getTitle()</h1><br>
-            <b><a href = "@routes.HomeController.stats(c.getTitle(),"false")">Global Stats for @c.getTitle()</a></b><br><br>
+            <b><a href = "@routes.HomeController.globalstats(c.getTitle())">Global Stats for @c.getTitle()</a></b><br><br>
             <b>Average Flesh Reading Ease Index: @c.getAverageIndex()</b><br>
             @for(p<-c.getProjects()) {
                 <p>
@@ -33,7 +33,8 @@
                 Title: <b>@p.getTitle()</b><br><br>
                 Type: @p.getType()<br><br>
 
-                Description: @p.getDesc()<br><br>
+                Description: @p.getDesc()&nbsp
+                <a href = "@routes.HomeController.indistats(p.getDesc())">Stats</a><br><br>
                 Flesh Reading Ease Index: <b>@p.getReadabilityIndex()</b> &nbsp &nbsp Education Level: <b>@p.getEducationLevel()</b>
                 &nbsp &nbsp FKGL: <b>@p.getFkglIndex()</b><br><br>
                 Required Skills: &nbsp
