@@ -3,4 +3,42 @@
 * handles the rendering of the page header and body tags. It takes
 * one arguments, a `List[Project]` for all projects of the search query.
 *@
-@()
+
+    @import model.Project
+    @import model.Job
+    @(projects:List[Project])(averageIndex: Float)(query : String)
+
+
+    <html>
+        <head>
+            <h1><p align="center">Top projects based on @query </p></h1><br>
+
+        </head>
+        <body>
+            <p>
+
+        <h1>List of active 10 projects based on @query</h1><br>
+            <b><a href = "@routes.HomeController.stats(query)">Global Stats for @query</a></b><br><br>
+            <b>Average Flesh Reading Ease Index: @averageIndex</b><br>
+            @for(p<-projects) {
+                <p>
+            <li>
+                OwnerID: <a href = "@routes.HomeController.user(p.getOwnerID().toString())">@p.getOwnerID</a>
+                <br><br> Time Submitted: @p.getTimeSubmitted()<br><br>
+                Title: <b>@p.getTitle()</b><br><br>
+                Type: @p.getType()<br><br>
+
+                Description: @p.getDesc()<br><br>
+                Flesh Reading Ease Index: <b>@p.getReadabilityIndex()</b> &nbsp &nbsp Education Level: <b>@p.getEducationLevel()</b>
+                &nbsp &nbsp FKGL: <b>@p.getFkglIndex()</b><br><br>
+                Required Skills: &nbsp
+
+                @for(j <- p.getSkills()){
+                    <a  href = "@routes.HomeController.skills(j.getJob_id().toString())" >@j.getJob_name()</a> &nbsp &nbsp
+                }
+
+            </li>
+                <br>
+                }
+        </body>
+    </html>

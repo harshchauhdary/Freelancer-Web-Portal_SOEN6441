@@ -26,9 +26,18 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
 
-    public Result index() {
+    public Result index(String query) throws IOException, ExecutionException, InterruptedException, ParseException {
+        String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
+        HashMap<String,String> params = new HashMap<>();
+        params.put("job_details","true");
+        params.put("compact","false");
+        params.put("full_description","true");
+        params.put("limit","10");
 
-        return ok(views.html.Home.home.render());
+        String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url,params);
+        List<Project> projects = DescriptionUtil.getReadabilityIndex(GeneralUtil.getProjectsFromJson(jsonResponse));
+        float averageIndex = DescriptionUtil.getAverageReadabilityIndex(projects);
+        return ok(views.html.Home.home.render(projects,averageIndex,query));
     }
     /**
      *
