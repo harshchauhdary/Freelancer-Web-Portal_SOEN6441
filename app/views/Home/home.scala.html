@@ -1,7 +1,8 @@
 @*
 * This template is called from the `index` template. This template
 * handles the rendering of the page header and body tags. It takes
-* one arguments, a `List[Project]` for all projects of the search query.
+*two arguments, a `List[Project]` for all projects of the search query.
+ and 'Float' value which is the average index of all 10 Projects
 *@
 
     @import model.Project
@@ -18,7 +19,7 @@
             <p>
 
         <h1>List of active 10 projects based on @query</h1><br>
-            <b><a href = "@routes.HomeController.stats(query)">Global Stats for @query</a></b><br><br>
+            <b><a href = "@routes.HomeController.stats(query,"false")">Global Stats for @query</a></b><br><br>
             <b>Average Flesh Reading Ease Index: @averageIndex</b><br>
             @for(p<-projects) {
                 <p>
