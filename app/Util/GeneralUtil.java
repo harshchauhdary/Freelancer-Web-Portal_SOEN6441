@@ -88,6 +88,16 @@ public class GeneralUtil {
         return response.toString();
     }
 
+    /**
+     * Used to obtain the list of projects from the received JSON file.
+     * This is done by parsing the JSON, storing data in JSONArrays.
+     * The Arrays are then traversed and the required data (Job Name and Job ID) are collected into a List.
+     * Completable Future and Java 8+ Streams are used to ensure non-blocking and Asynchronous execution of the code.
+     * @param response Entire JSON file received from the getJSONFromURL method in the String format.
+     * @return A list of projects, linked together in the key-value pairs of Job ID and Job Name
+     * @throws ParseException It is encountered when the system encounters a runtime error while traversing
+     */
+
     public static List<Project> getProjectsFromJson(String response) throws ParseException {
         JSONParser parser = new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);
