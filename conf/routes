@@ -3,7 +3,9 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET        /:query                    controllers.HomeController.index(query:String)
+GET        /:query                            controllers.HomeController.home(query)
+GET        /                    controllers.HomeController.index
+
 GET        /skills/:jobId         controllers.HomeController.skills(jobId:String)
 GET        /user/:userId            controllers.HomeController.user(userId:String)
 GET        /stats/:query/:single        controllers.HomeController.stats(query:String, single:String)

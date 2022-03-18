@@ -7,21 +7,25 @@
 
     @import model.Project
     @import model.Job
-    @(projects:List[Project])(averageIndex: Float)(query : String)
+    @import model.Canva
+    @(canvas:List[Canva])
 
 
     <html>
+
+
         <head>
-            <h1><p align="center">Top projects based on @query </p></h1><br>
+            <h1><p align="center">Top projects </p></h1><br>
 
         </head>
         <body>
+            @for(c <- canvas){
             <p>
 
-        <h1>List of active 10 projects based on @query</h1><br>
-            <b><a href = "@routes.HomeController.stats(query,"false")">Global Stats for @query</a></b><br><br>
-            <b>Average Flesh Reading Ease Index: @averageIndex</b><br>
-            @for(p<-projects) {
+        <h1>List of active 10 projects based on @c.getTitle()</h1><br>
+            <b><a href = "@routes.HomeController.stats(c.getTitle(),"false")">Global Stats for @c.getTitle()</a></b><br><br>
+            <b>Average Flesh Reading Ease Index: @c.getAverageIndex()</b><br>
+            @for(p<-c.getProjects()) {
                 <p>
             <li>
                 OwnerID: <a href = "@routes.HomeController.user(p.getOwnerID().toString())">@p.getOwnerID</a>
@@ -40,6 +44,7 @@
 
             </li>
                 <br>
-                }
+                }}
+
         </body>
     </html>

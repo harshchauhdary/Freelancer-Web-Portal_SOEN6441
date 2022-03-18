@@ -1,6 +1,7 @@
 package controllers;
 
 import Util.DescriptionUtil;
+import model.Canva;
 import model.Project;
 import model.User;
 import org.json.simple.parser.ParseException;
@@ -26,18 +27,38 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
 
-    public Result index(String query) throws IOException, ExecutionException, InterruptedException, ParseException {
-        String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
-        HashMap<String,String> params = new HashMap<>();
-        params.put("job_details","true");
-        params.put("compact","false");
-        params.put("full_description","true");
-        params.put("limit","10");
+    public Result index(){
+        List<Canva> canvas = new ArrayList<>();
+        canvas.addAll(Canva.getCanvas());
+        Collections.reverse(canvas);
+        return ok(views.html.Home.index.render(canvas));
+    }
 
-        String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url,params);
-        List<Project> projects = DescriptionUtil.getReadabilityIndex(GeneralUtil.getProjectsFromJson(jsonResponse));
-        float averageIndex = DescriptionUtil.getAverageReadabilityIndex(projects);
-        return ok(views.html.Home.home.render(projects,averageIndex,query));
+    public Result home(String query) throws IOException, ExecutionException, InterruptedException, ParseException {
+
+
+
+
+            String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
+            HashMap<String, String> params = new HashMap<>();
+            params.put("job_details", "true");
+            params.put("compact", "false");
+            params.put("full_description", "true");
+            params.put("limit", "10");
+
+            String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url, params);
+            List<Project> projects = DescriptionUtil.getReadabilityIndex(GeneralUtil.getProjectsFromJson(jsonResponse));
+            float averageIndex = DescriptionUtil.getAverageReadabilityIndex(projects);
+            Canva c = new Canva(query, averageIndex, projects);
+            if (Canva.getCanvas().size() == 10) {
+                Canva.clearCanvas();
+            }
+            Canva.setCanvasinList(c);
+
+        List<Canva> canvas = new ArrayList<>();
+        canvas.addAll(Canva.getCanvas());
+        Collections.reverse(canvas);
+        return ok(views.html.Home.home.render(canvas));
     }
     /**
      *

@@ -1,5 +1,6 @@
 package Util;
 
+import javax.inject.Inject;
 import model.Job;
 import  model.Project;
 import model.User;
@@ -7,8 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,7 +31,6 @@ public class GeneralUtil {
 
     /**
      * Executor used by the completable future defining the number of threads i.e.250
-
      */
     private final static Executor executor ;
 
@@ -63,6 +61,9 @@ public class GeneralUtil {
      * @see <a href="https://www.playframework.com/documentation/2.8.x/ScalaWS">Play Ws<a/>
      */
     public static String getJsonResponseFromUrl(String url, HashMap<String, String> params) throws IOException {
+
+
+
         String param = "?";
         if(params!=null)
         {
