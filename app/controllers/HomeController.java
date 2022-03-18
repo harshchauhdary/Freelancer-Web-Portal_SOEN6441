@@ -20,12 +20,6 @@ import java.util.concurrent.ExecutionException;
  */
 public class HomeController extends Controller {
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
 
     public Result index(){
         List<Canva> canvas = new ArrayList<>();
@@ -41,13 +35,16 @@ public class HomeController extends Controller {
 
             String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
             HashMap<String, String> params = new HashMap<>();
+            params.put("query", query);
             params.put("job_details", "true");
             params.put("compact", "false");
-            params.put("full_description", "true");
             params.put("limit", "10");
 
             String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url, params);
             List<Project> projects = DescriptionUtil.getReadabilityIndex(GeneralUtil.getProjectsFromJson(jsonResponse));
+            if (projects.size()==0){
+                return ok(views.html.Home.error.render("No projects found"));
+            }
             float averageIndex = DescriptionUtil.getAverageReadabilityIndex(projects);
             Canva c = new Canva(query, averageIndex, projects);
             if (Canva.getCanvas().size() == 10) {
@@ -77,7 +74,6 @@ public class HomeController extends Controller {
         HashMap<String,String> params = new HashMap<>();
         params.put("job_details","true");
         params.put("compact","false");
-        params.put("full_description","true");
         params.put("jobs[]",jobId);
         params.put("limit","10");
 
@@ -105,18 +101,26 @@ public class HomeController extends Controller {
         return ok(views.html.Home.user.render(user));
     }
 
+    /**
+     * Action for Global Statistics
+     * @author Harsh
+     * @param query Search query to show statistics for
+     * @return Displays statistics of 250 projects for a given query
+     * @throws IOException
+     * @throws ParseException
+     */
     public Result globalstats(String query) throws IOException, ParseException {
         List<String> result = new ArrayList<>();
         String encodeQuery = java.net.URLEncoder.encode(query, "UTF-8");
 
-        String url = "https://www.freelancer.com/api/projects/0.1/projects/all/";
+        String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
         HashMap<String, String> params = new HashMap<>();
         params.put("query", encodeQuery);
         params.put("sort_field", "time_updated");
         params.put("compact", "false");
-        params.put("full_description", "true");
         params.put("offset", "0");
         String response1 = GeneralUtil.getJsonResponseFromUrl(url, params);
+        System.out.println(response1);
         params.remove("offset");
         params.put("offset", "100");
         String response2 = GeneralUtil.getJsonResponseFromUrl(url, params);
@@ -127,10 +131,18 @@ public class HomeController extends Controller {
         result.addAll(GeneralUtil.getDescriptionFromJson(response1));
         result.addAll(GeneralUtil.getDescriptionFromJson(response2));
         result.addAll(GeneralUtil.getDescriptionFromJson(response3));
+        System.out.println(result.size());
         Map<String, Long> stats = StatsUtil.getStats(result);
         return ok(views.html.Home.stats.render(StatsUtil.sortStats(stats)));
     }
 
+    /**
+     * Action for
+     * @param description
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     public Result indistats(String description) throws IOException, ParseException{
         List<String> result = new ArrayList<>();
         result.add(description);
