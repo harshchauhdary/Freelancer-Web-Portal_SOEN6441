@@ -132,22 +132,21 @@ public class GeneralUtil {
     }
 
     /**
-     * This Method is used to get the description of the projects provided, from the JSON File, which is
-     * provided as a String to the method
-     * @param response JSON file of the projects, passed as a String
-     * @return Preview Description of projects, in List format. Java 8+ Stream and Completable Future are used for Async
-     * Execution
-     * @throws ParseException It is encountered when system encounters an error while traversing the data
+     * Gets the preview descriptions from a JSON containing projects, which is provided as a String
+     * @param response JSON of the projects for a search query, passed as a String
+     * @return Returns preview descriptions of projects, as a List&lt;String&gt;.
+     * @throws ParseException
      */
 
     public static List<String> getDescriptionFromJson(String response) throws ParseException {
+        //parsing JSON
         JSONParser parser = new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);
         JSONObject dataMap = (JSONObject) jObj.get("result");
 
         JSONArray dataArray = (JSONArray) dataMap.get("projects");
 
-
+        //getting preview descriptions, converting them to lowercase & storing them in a List of Strings
         List<CompletableFuture<String>> collect = (List<CompletableFuture<String>>) dataArray.stream().map(obj -> CompletableFuture.supplyAsync(() -> {
                     JSONObject jsonObject = (JSONObject) obj;
                     String lcase = (String) jsonObject.get("preview_description");

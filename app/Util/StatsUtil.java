@@ -43,11 +43,12 @@ public class StatsUtil {
     /**
      * Sorts map by value in descending order using LinkedHashMap(as it stores in same order as insertion)
      * @param stats Map&lt;String, Long&gt; containing words as keys and their frequency as values
-     * @return LinkedHashMap&lt;String, Long&gt; containing sorted statistics
+     * @return Returns a LinkedHashMap&lt;String, Long&gt; containing sorted statistics
      */
     public static LinkedHashMap<String, Long> sortStats(Map<String, Long> stats){
         LinkedHashMap<String, Long> sortedStats = new LinkedHashMap<>();
 
+        //sorting and adding to the LinkedHashMap
         stats.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
