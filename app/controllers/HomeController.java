@@ -29,10 +29,6 @@ public class HomeController extends Controller {
     }
 
     public Result home(String query) throws IOException, ExecutionException, InterruptedException, ParseException {
-
-
-
-
             String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
             HashMap<String, String> params = new HashMap<>();
             params.put("query", query);
