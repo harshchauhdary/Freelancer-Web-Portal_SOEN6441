@@ -68,6 +68,15 @@ public class HomeController extends Controller {
 
 
     }
+    /**
+     * This method is invoked when the User clicks on owner_id field on the home page
+     * It redirects to a page which contains information about the user.
+     * @author Bhargav Bhutwala 40196468
+     * @param id owner_id that is unique for each user, and it will fetch user's data based on its owner_id
+     * @return displays the page that contains information about the user as well as their last 10 projects
+     * @throws IOException thrown when an I/O error occurs.
+     * @throws ParseException Signals that an error has been reached unexpectedly while parsing
+     */
     public Result user(String id) throws IOException, ParseException {
         String url="https://www.freelancer.com/api/users/0.1/users/"+id;
         String jsonRespone= GeneralUtil.getJsonResponseFromUrl(url,null);
