@@ -24,6 +24,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
+ * @author Sahil Munj Bhargav Harsh
  * Contains all general methods used for fetching and processing the response
  * @see CompletableFuture
  * @see Executor
@@ -33,6 +34,7 @@ public class GeneralUtil {
 
 
     /**
+     * @author Sahil
      * Executor used by the completable future defining the number of threads i.e.250
      * @see Executor
      */
@@ -49,11 +51,24 @@ public class GeneralUtil {
     }
 
     /**
-     * Gets the Executor created in the static block
-     * @return
+     * @author sahil
+     * Gets the custom Executor created in the static block.
+     * @return Executor
+     * @see Executor
      */
     public static Executor getExecutor(){return executor;}
 
+    /**
+     * @author sahil
+     * Gets the json String using the url and params passed.It makes a call to the freelance api with the url constructed and
+     * returns the json response fetched from the api.It uses ws service of plat framework for the asynchronus call
+     * @param url base url
+     * @param params parameter to be added to the url
+     * @return json response from the api
+     * @throws IOException
+     * @see <a href="https://www.google.com/url?q=https://www.freelancer.com/api&sa=D&source=editors&ust=1647564305189643&usg=AOvVaw1Hch_j-vbGsnR5Jyo4-TK8">Freelancer api<a/>
+     * @see <a href="https://www.playframework.com/documentation/2.8.x/ScalaWS">Play Ws<a/>
+     */
     public static String getJsonResponseFromUrl(String url, HashMap<String, String> params) throws IOException {
         String param = "?";
         if(params!=null)

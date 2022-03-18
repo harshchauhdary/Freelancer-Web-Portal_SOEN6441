@@ -15,10 +15,12 @@ import java.util.stream.Collectors;
  */
 public class DescriptionUtil {
     /**
-     * It computes the readability index of all project description and then sets the property "readability index" of Project with it.
+     * It computes the readability index and FkGL of all project description and then sets the property "readability index" and "FKGL"of Project with it.
      * @param projects List of all project for whom the readability index has to be calculated.
      * @return List of projects for whom the readability index is set as a property.
-     *
+     * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
+     * @see <a href="https://www.google.com/url?q=https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests&sa=D&source=editors&ust=1647564305226163&usg=AOvVaw3bwQ9Dl_E-VdqhapgkmnBC">FKGL</a>
+     * @see Project
      */
     public static List<Project> getReadabilityIndex(List<Project> projects) {
 
@@ -67,6 +69,7 @@ public class DescriptionUtil {
      * It returns the level of education required for a particular person to understand the description of project based on the readability index.
      * @param fleschIndex readability index of the description
      * @return Education level required based on the readability index.
+     * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
      */
     public static String getIndexLevel(int fleschIndex) {
         String educationLevel;
@@ -100,6 +103,7 @@ public class DescriptionUtil {
      * @return average of all the readability index as a float value
      * @throws ExecutionException
      * @throws InterruptedException
+     * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
      */
     public static float getAverageReadabilityIndex(List<Project> projects) throws ExecutionException, InterruptedException {
         CompletableFuture<Optional<Integer>> sum = CompletableFuture.supplyAsync(() -> {
