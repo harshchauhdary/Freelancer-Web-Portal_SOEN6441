@@ -24,19 +24,15 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
- * @author Sahil Munj Bhargav Harsh
  * Contains all general methods used for fetching and processing the response
- * @see CompletableFuture
- * @see Executor
- * @see java.util.stream.Stream
+ * @author Sahil Munj Bhargav Harsh
  */
 public class GeneralUtil {
 
 
     /**
-     * @author Sahil
      * Executor used by the completable future defining the number of threads i.e.250
-     * @see Executor
+
      */
     private final static Executor executor ;
 
@@ -51,15 +47,12 @@ public class GeneralUtil {
     }
 
     /**
-     * @author sahil
      * Gets the custom Executor created in the static block.
      * @return Executor
-     * @see Executor
      */
     public static Executor getExecutor(){return executor;}
 
     /**
-     * @author sahil
      * Gets the json String using the url and params passed.It makes a call to the freelance api with the url constructed and
      * returns the json response fetched from the api.It uses ws service of plat framework for the asynchronus call
      * @param url base url
