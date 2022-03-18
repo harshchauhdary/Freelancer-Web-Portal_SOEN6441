@@ -23,11 +23,19 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+/**
+ * Contains all general methods used for fetching and processing the response
+ * @see CompletableFuture
+ * @see Executor
+ * @see java.util.stream.Stream
+ */
 public class GeneralUtil {
 
 
-
-
+    /**
+     * Executor used by the completable future defining the number of threads i.e.250
+     * @see Executor
+     */
     private final static Executor executor ;
 
     static{
@@ -40,7 +48,10 @@ public class GeneralUtil {
         );
     }
 
-
+    /**
+     * Gets the Executor created in the static block
+     * @return
+     */
     public static Executor getExecutor(){return executor;}
 
     public static String getJsonResponseFromUrl(String url, HashMap<String, String> params) throws IOException {

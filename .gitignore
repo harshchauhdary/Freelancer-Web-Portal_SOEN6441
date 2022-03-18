@@ -47,7 +47,7 @@
 
 # CMake
 cmake-build-*/
-
+.idea/modules/Assignment1-build.iml
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 
