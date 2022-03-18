@@ -131,6 +131,14 @@ public class GeneralUtil {
 
     }
 
+    /**
+     * This Method is used to get the description of the projects provided, from the JSON File, which is
+     * provided as a String to the method
+     * @param response JSON file of the projects, passed as a String
+     * @return Preview Description of projects, in List format. Java 8+ Stream and Completable Future are used for Async
+     * Execution
+     * @throws ParseException It is encountered when system encounters an error while traversing the data
+     */
 
     public static List<String> getDescriptionFromJson(String response) throws ParseException {
         JSONParser parser = new JSONParser();

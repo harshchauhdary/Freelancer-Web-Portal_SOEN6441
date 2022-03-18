@@ -98,12 +98,12 @@ public class HomeController extends Controller {
     }
 
     /**
-     * Action for Global Statistics
-     * @author Harsh
+     * Action for displaying Word Statistics of 250 projects for a given query.
      * @param query Search query to show statistics for
-     * @return Displays statistics of 250 projects for a given query
+     * @return Renders statistics page
      * @throws IOException
      * @throws ParseException
+     * @see Project
      */
     public Result globalstats(String query) throws IOException, ParseException {
         List<String> result = new ArrayList<>();
@@ -133,11 +133,12 @@ public class HomeController extends Controller {
     }
 
     /**
-     * Action for
-     * @param description
-     * @return
+     * Action for displaying Word Statistics of a given project.
+     * @param description Preview description of a project
+     * @return Renders project statistics page
      * @throws IOException
      * @throws ParseException
+     * @see Project
      */
     public Result indistats(String description) throws IOException, ParseException{
         List<String> result = new ArrayList<>();

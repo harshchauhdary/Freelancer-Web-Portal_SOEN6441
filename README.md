@@ -1,1 +1,1 @@
-# Play Framework Freelencer API SOEN6441
+# Play Framework Freelancer API SOEN6441
