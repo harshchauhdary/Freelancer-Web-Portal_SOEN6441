@@ -4,24 +4,65 @@ package model;
 
 import java.util.*;
 
+/**
+ * Represents the project entity abtained from the freelancer api
+ *
+ * @author Sahil Munj
+ */
 public class Project {
+    /**
+     * Id of project
+     */
     private long id;
+    /**
+     * Description of project
+     */
     private String description;
+    /**
+     * Readability Index of projects Description
+     *
+     * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
+     */
     private int readabilityIndex;
+    /**
+     * Education level required for user to understand the project description
+     * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
+     */
     private String educationLevel;
+    /**
+     * List of skills required for the job
+     * @see Job
+     */
     private List<Job> skills;
+    /**
+     * Id of the owner who created the project
+     */
+    private long ownerID;
+    /**
+     * time when the project was submitted
+     */
+    private Date timeSubmitted;
+    /**
+     * FKGL index of the description of project
+     * @see <a href="https://www.google.com/url?q=https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests&sa=D&source=editors&ust=1647564305226163&usg=AOvVaw3bwQ9Dl_E-VdqhapgkmnBC">FKGL</a>
+     */
+    private int fkglIndex;
+    /**
+     * Type of project
+     */
+    private String type;
+    /**
+     * Title of project
+     */
+    private String title;
+
 
     public int getFkglIndex() {
         return fkglIndex;
     }
-
     public void setFkglIndex(int fkglIndex) {
         this.fkglIndex = fkglIndex;
     }
-
-    private long ownerID;
-    private Date timeSubmitted;
-    private int fkglIndex;
 
     public Date getTimeSubmitted() {
         return timeSubmitted;
@@ -47,8 +88,7 @@ public class Project {
         this.skills = skills;
     }
 
-    private String type;
-    private String title;
+
 
     public long getOwnerID() {
         return ownerID;
@@ -58,15 +98,7 @@ public class Project {
         this.ownerID = ownerID;
     }
 
-
-    private String name;
-
     public Project() {
-    }
-
-    public Project(long id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public String getType() {
@@ -77,6 +109,16 @@ public class Project {
         this.type = type;
     }
 
+    /**
+     * Creating project based on the given details
+     * @param id id of project
+     * @param description description of project
+     * @param title title of project
+     * @param timeSubmitted time when the project was submitted
+     * @param ownerID id of owner who created the project
+     * @param skills skills required for the project
+     * @param type type of project
+     */
     public Project(long id, String description, String title, Date timeSubmitted, long ownerID, List<Job> skills, String type) {
         this.id = id;
         this.description = description;

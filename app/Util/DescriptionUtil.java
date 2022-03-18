@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 
 /**
  * Utility functions for computing the readability and average of all the readability index of all projects.
- * @author S_K
- * @version 1.5
+ * @author Sahil 40192697
  */
 public class DescriptionUtil {
     /**
-     * It computes the readability index of all project description and then sets the property f readability index with it.
-     * @param projects List of all project for whom the readability index has t be calculated.
+     * It computes the readability index of all project description and then sets the property "readability index" of Project with it.
+     * @param projects List of all project for whom the readability index has to be calculated.
      * @return List of projects for whom the readability index is set as a property.
+     *
      */
     public static List<Project> getReadabilityIndex(List<Project> projects) {
 
