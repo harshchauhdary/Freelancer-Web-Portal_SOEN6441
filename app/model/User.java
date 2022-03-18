@@ -2,10 +2,25 @@ package model;
 
 import java.util.List;
 
+/**
+ * @author Bhargav Bhutwala 40196468
+ * This class is used in obtaining all the information about the user and their projects, which are in
+ *  turn stored in JSon File and then parsed using json parser.
+ */
+
 public class User {
 
+    /**
+     * id of the user
+     */
     private long id;
+    /**
+     * username of the user
+     */
     private String username;
+    /**
+     * display name of the user
+     */
     private String display_name;
 
     public String getRole() {

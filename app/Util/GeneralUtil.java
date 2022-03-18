@@ -139,6 +139,16 @@ public class GeneralUtil {
 
         return collect.stream().map(CompletableFuture::join).collect(Collectors.toList());
     }
+    /**
+     * This method provides user data which is obtained through response parameter, response parameter contains data which obtained directly from url
+     * @author Bhargav Bhutwala 40196468
+     * @param response user data in JSON form
+     * @return user object containing last 10 projects of user and user details like id, username...
+     * @throws ParseException Signals that an error has been reached unexpectedly while parsing
+     * @throws IOException thrown when an I/O error occurs
+     * @see User
+     * @see Project
+     */
 
     public static User getUserFromJson(String response) throws ParseException, IOException {
         JSONParser parser=new JSONParser();
