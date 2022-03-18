@@ -30,7 +30,18 @@ public class HomeController extends Controller {
 
         return ok(views.html.Home.home.render());
     }
-    
+    /**
+     *
+     * This method is invoked when the User clicks on any of the listed skills of the projects listed on the home page
+     * It redirects to a page which contains the latest active projects' information, which is displayed in the same format as the homepage.
+     *
+     * @param jobId The Unique identifier for the Job category, which is used to search for a specific job.
+     * @return Displays the latest active projects which contain the selected skill, with the limit capped at 10
+     * @throws IOException If the data is not upto the specific requirements of the system
+     * @throws ParseException If the system encounters an error during the parsing of the API
+     * @throws ExecutionException If the system fails to retrieve the necessary data while executing the requests.
+     * @throws InterruptedException If the runtime is halted/hindered by some unforeseen reason.
+     */
     public Result skills(String jobId) throws IOException, ParseException, ExecutionException, InterruptedException {
         String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
         HashMap<String,String> params = new HashMap<>();

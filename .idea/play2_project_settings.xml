@@ -27,8 +27,8 @@
         <entry key="root">
           <value>
             <ProjectSettingsEntry>
-              <option name="sourceDir" value="C:\Users\Dell\Desktop\CONCORDIA\SEON\ass1\Project_Full\Assignment1\app" />
-              <option name="confDir" value="C:\Users\Dell\Desktop\CONCORDIA\COMP 16\Assignment_3\SOEN_BHMS\app" />
+              <option name="sourceDir" value="C:\Users\Dell\Desktop\CONCORDIA\COMP 16\Assignment_3\SOEN_BHMS\app" />
+              <option name="confDir" value="C:\Users\saita\Desktop\SOEN_BHMS\app" />
               <option name="templateImports">
                 <list>
                   <option value="_root_.play.twirl.api.TwirlFeatureImports._" />
@@ -58,7 +58,7 @@
                   <option value="play.libs.F" />
                 </list>
               </option>
-              <option name="uri" value="/C:/Users/Dell/Desktop/CONCORDIA/COMP%2016/Assignment_3/SOEN_BHMS" />
+              <option name="uri" value="/C:/Users/saita/Desktop/SOEN_BHMS" />
             </ProjectSettingsEntry>
           </value>
         </entry>
