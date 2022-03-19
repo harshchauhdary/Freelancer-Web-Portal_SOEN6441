@@ -1,6 +1,6 @@
 package Util;
-
-import javax.inject.Inject;
+import com.fasterxml.jackson.databind.JsonNode;
+import play.libs.ws.*;
 import model.Job;
 import  model.Project;
 import model.User;
@@ -8,18 +8,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +18,6 @@ import java.util.stream.Collectors;
  * @author Sahil Munj Bhargav Harsh
  */
 public class GeneralUtil {
-
 
     /**
      * Executor used by the completable future defining the number of threads i.e.250
@@ -51,41 +41,35 @@ public class GeneralUtil {
     public static Executor getExecutor(){return executor;}
 
     /**
-     * Gets the json String using the url and params passed.It makes a call to the freelance api with the url constructed and
-     * returns the json response fetched from the api.It uses ws service of plat framework for the asynchronous call
+     * Gets the json String using the url and params passed.It makes  asynchronous call to the freelance api with the url constructed and
+     * returns the json response fetched from the api.It uses ws service of plat framework for the asynchronus call
+     * @author Sahil
      * @param url base url
      * @param params parameter to be added to the url
+     * @param ws Wsclient used for sending the request asynchronous
      * @return json response from the api
      * @throws IOException
      * @see <a href="https://www.google.com/url?q=https://www.freelancer.com/api&sa=D&source=editors&ust=1647564305189643&usg=AOvVaw1Hch_j-vbGsnR5Jyo4-TK8">Freelancer api<a/>
      * @see <a href="https://www.playframework.com/documentation/2.8.x/ScalaWS">Play Ws<a/>
      */
-    public static String getJsonResponseFromUrl(String url, HashMap<String, String> params) throws IOException {
-
-
-
+    public static String getJsonResponseFromUrl(String url, HashMap<String, String> params,WSClient ws) throws IOException, ExecutionException, InterruptedException {
         String param = "?";
+        String fullURl;
         if(params!=null)
         {
             for (String key :
                     params.keySet()) {
                 param = param + key + "=" + params.get(key) + "&";
             }
-        }
-        URL obj = new URL(url + param);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        int responseCode = con.getResponseCode();
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-                con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
 
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            fullURl = url + param;
         }
-        in.close();
-        return response.toString();
+        else {
+            fullURl = url;
+        }
+        CompletableFuture<JsonNode> response = ws.url(fullURl)
+                .get().thenApply(WSResponse::asJson).toCompletableFuture();
+        return response.get().toString();
     }
 
     /**
@@ -131,22 +115,15 @@ public class GeneralUtil {
 
     }
 
-    /**
-     * Gets the preview descriptions from a JSON containing projects, which is provided as a String
-     * @param response JSON of the projects for a search query, passed as a String
-     * @return Returns preview descriptions of projects, as a List&lt;String&gt;.
-     * @throws ParseException
-     */
 
     public static List<String> getDescriptionFromJson(String response) throws ParseException {
-        //parsing JSON
         JSONParser parser = new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);
         JSONObject dataMap = (JSONObject) jObj.get("result");
 
         JSONArray dataArray = (JSONArray) dataMap.get("projects");
 
-        //getting preview descriptions, converting them to lowercase & storing them in a List of Strings
+
         List<CompletableFuture<String>> collect = (List<CompletableFuture<String>>) dataArray.stream().map(obj -> CompletableFuture.supplyAsync(() -> {
                     JSONObject jsonObject = (JSONObject) obj;
                     String lcase = (String) jsonObject.get("preview_description");
@@ -160,6 +137,7 @@ public class GeneralUtil {
      * This method provides user data which is obtained through response parameter, response parameter contains data which obtained directly from url
      * @author Bhargav Bhutwala 40196468
      * @param response user data in JSON form
+     * @param ws Wsclient to make a asynchronous request
      * @return user object containing last 10 projects of user and user details like id, username...
      * @throws ParseException Signals that an error has been reached unexpectedly while parsing
      * @throws IOException thrown when an I/O error occurs
@@ -167,29 +145,18 @@ public class GeneralUtil {
      * @see Project
      */
 
-    public static User getUserFromJson(String response) throws ParseException, IOException {
+    public static User getUserFromJson(String response,WSClient ws) throws ParseException, IOException, ExecutionException, InterruptedException {
         JSONParser parser=new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);
         JSONObject jsonObject=(JSONObject) jObj.get("result");
-        JSONObject jsonObject1=(JSONObject) jsonObject.get("location");
-        JSONObject jsonObject2=(JSONObject)jsonObject1.get("country");
-        JSONObject jsonObject3=(JSONObject)jsonObject.get("status");
-        JSONObject jsonObject4=(JSONObject)jsonObject.get("primary_currency");
 
 
         String username= (String) jsonObject.get("username");
         long id = (long) jsonObject.get("id");
-        long reg_date=(long)jsonObject.get("registration_date");
-        boolean limited_account=(boolean) jsonObject.get("limited_account");
         String display_name = (String) jsonObject.get("display_name");
         String role = (String) jsonObject.get("role");
-        String chosen_role=(String)jsonObject.get("chosen_role");
-        String country=(String)jsonObject2.get("name");
-        boolean email_verified=(boolean)jsonObject3.get("email_verified");
-        String primary_currency=(String)jsonObject4.get("name");
 
-
-        User user_obj=new User(id,username,display_name,role,reg_date,limited_account,chosen_role,country,email_verified,primary_currency);
+        User user_obj=new User(id,username,display_name,role);
 
         String url="https://www.freelancer.com/api/projects/0.1/projects";
         HashMap<String,String> params = new HashMap<>();
@@ -197,10 +164,25 @@ public class GeneralUtil {
         params.put("full_description","true");
         params.put("job_details","true");
         params.put("limit","10");
-        String data=getJsonResponseFromUrl(url,params);
+        String data=getJsonResponseFromUrl(url,params,ws);
         List<Project> projects=DescriptionUtil.getReadabilityIndex(getProjectsFromJson(data));
         user_obj.setProjects(projects);
 
         return user_obj;
+    }
+
+    public static String generateId(Set<String> ids){
+        boolean check = true;
+
+        String ch = "ABCDEFHIJKKLMNPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        StringBuilder id = new StringBuilder();
+        while(check) {
+            for(int i = 0 ; i<10;i++) {
+                int index = (int) (ch.length() * Math.random());
+                id.append(ch.charAt(index));
+            }
+            check = ids.stream().anyMatch(r -> r.equals(id.toString()));
+        }
+        return id.toString();
     }
 }

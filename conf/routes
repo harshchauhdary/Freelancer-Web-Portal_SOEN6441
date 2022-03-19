@@ -3,9 +3,11 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET        /:query                            controllers.HomeController.home(query)
-GET        /                    controllers.HomeController.index
 
+GET        /                    controllers.HomeController.index(request:Request)
++nocsrf
+POST        /                   controllers.HomeController.home(request : Request)
+GET        /logout              controllers.HomeController.logout(request : Request)
 GET        /skills/:jobId         controllers.HomeController.skills(jobId:String)
 GET        /user/:userId            controllers.HomeController.user(userId:String)
 GET        /stats/all/:query        controllers.HomeController.globalstats(query:String)

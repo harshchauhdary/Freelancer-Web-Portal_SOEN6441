@@ -8,17 +8,24 @@
     @import model.Project
     @import model.Job
     @import model.Canva
-    @(canvas:List[Canva])
+    @import model.Query
+    @import helper._
+    @(canvas:List[Canva])(queryForm : Form[Query])(implicit message: play.i18n.Messages)
 
 
     <html>
 
 
-        <head>
-            <h1><p align="center">Top projects </p></h1><br>
 
-        </head>
         <body>
+
+            @helper.form(action = routes.HomeController.home()){
+                @helper.inputText(queryForm("query"))
+
+                <input type="submit" value="create query"/>
+            }
+            <button class="button" onclick="window.location.href='@routes.HomeController.logout';">LogOut</button>
+        <br>
             @for(c <- canvas){
             <p>
 

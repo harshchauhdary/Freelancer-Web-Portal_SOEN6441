@@ -15,20 +15,13 @@ public class Canva {
     /**
      * Average Readability index of all 10 projects retrieved based on the title
      */
-    private float averageIndex;
+    private double averageIndex;
     /**
      * Latest active 10 projects retrieved from the api based on the title
      */
     private List<Project> projects;
 
-    /**
-     * List of all canvas searched by the user
-     */
-    private static List<Canva> canvas;
 
-    static{
-        canvas = new ArrayList<>();
-    }
 
     /**
      * Gets the title of canva
@@ -38,28 +31,11 @@ public class Canva {
         return title;
     }
 
-    /**
-     * Gets list of all canvas searched by the user
-     * @return
-     */
-    public static List<Canva> getCanvas() {
-        return canvas;
-    }
 
-    /**
-     * Adds the canva created to the static list of all Canvas
-     * @param canva
-     */
-    public static void setCanvasinList(Canva canva) {
-        canvas.add(canva);
-    }
 
-    /**
-     * Clears the canvas list when the size of Canvas reaches 10
-     */
-    public static void clearCanvas(){
-        canvas.clear();
-    }
+
+
+
 
     /**
      * Sets the title of canva
@@ -73,14 +49,14 @@ public class Canva {
      * Gets the averageRedability index of all the 10 canvas
      * @return
      */
-    public float getAverageIndex() {
+    public double getAverageIndex() {
         return averageIndex;
     }
     /**
      * Sets the averageRedability index of all the 10 canvas
      * @param averageIndex
      */
-    public void setAverageIndex(float averageIndex) {
+    public void setAverageIndex(double averageIndex) {
         this.averageIndex = averageIndex;
     }
 
@@ -106,10 +82,11 @@ public class Canva {
      * @param averageIndex average Readability index of all 10 projects
      * @param projects List of all active 10 projects based on the query
      */
-    public Canva(String title, float averageIndex, List<Project> projects) {
+    public Canva(String title, double averageIndex, List<Project> projects) {
         this.title = title;
         this.averageIndex = averageIndex;
         this.projects = projects;
+
     }
 
 
