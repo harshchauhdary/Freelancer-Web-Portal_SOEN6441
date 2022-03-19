@@ -125,6 +125,66 @@ public class User {
         this.display_name = display_name;
     }
 
+    public long getReg_date() {
+        return reg_date;
+    }
+
+    public void setReg_date(long reg_date) {
+        this.reg_date = reg_date;
+    }
+
+    private long reg_date;
+
+    public boolean getLimited_account() {
+        return limited_account;
+    }
+
+    public void setLimited_account(boolean limited_account) {
+        this.limited_account = limited_account;
+    }
+
+    private boolean limited_account;
+
+    public String getChosen_role() {
+        return chosen_role;
+    }
+
+    public void setChosen_role(String chosen_role) {
+        this.chosen_role = chosen_role;
+    }
+
+    private String chosen_role;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    private String country;
+
+    public boolean getEmail_verified() {
+        return email_verified;
+    }
+
+    public void setEmail_verified(boolean email_verified) {
+        this.email_verified = email_verified;
+    }
+
+    private boolean email_verified;
+
+    public String getPrimary_currency() {
+        return primary_currency;
+    }
+
+    public void setPrimary_currency(String primary_currency) {
+        this.primary_currency = primary_currency;
+    }
+
+    private String primary_currency;
+
     /**
      * Creating user based on obtained data
      * @param id id of user
@@ -133,10 +193,16 @@ public class User {
      * @param role role of the user
      */
 
-    public User(long id, String username, String display_name,String role){
+    public User(long id, String username, String display_name,String role,long reg_date,boolean limited_account,String chosen_role,String country,boolean email_verified,String primary_currency){
         this.id=id;
         this.username=username;
         this.display_name=display_name;
         this.role=role;
+        this.reg_date=reg_date;
+        this.limited_account=limited_account;
+        this.chosen_role=chosen_role;
+        this.country=country;
+        this.email_verified=email_verified;
+        this.primary_currency=primary_currency;
     }
 }

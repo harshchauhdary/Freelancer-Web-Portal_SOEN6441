@@ -18,7 +18,13 @@
         <p><b>Owner_id:</b>&nbsp@user.getId()<br><br>
             <b>Name:</b>&nbsp@user.getUsername()<br><br>
             <b>Display Name:</b>&nbsp@user.getDisplay_name()<br><br>
-            <b>Role:</b>&nbsp@user.getRole()<br><br></p>
+            <b>Role:</b>&nbsp@user.getRole()<br><br>
+            <b>Chosen Role:</b>&nbsp@user.getChosen_role()<br><br>
+            <b>Registration Date:</b>&nbsp@user.getReg_date()<br><br>
+            <b>Limited Account:</b>&nbsp@user.getLimited_account()<br><br>
+            <b>Location:</b>&nbsp@user.getCountry()<br><br>
+            <b>Email Verified:</b>&nbsp@user.getEmail_verified()<br><br>
+            <b>Primary Currency:</b>&nbsp@user.getPrimary_currency()<br><br></p>
         <h2>Last 10 Projects</h2>
         @for(p<-user.getProjects()) {
             <p>
