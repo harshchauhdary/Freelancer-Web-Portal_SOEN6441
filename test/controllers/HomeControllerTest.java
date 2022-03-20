@@ -37,13 +37,6 @@ import javax.inject.Inject;
 
 public class HomeControllerTest extends WithApplication {
 
-//    WSClient ws;
-//
-//    @Inject
-//    public HomeControllerTest(WSClient wsClient) {
-//        this.ws = wsClient;
-//    }
-
     @Override
     protected Application provideApplication() {
         return new GuiceApplicationBuilder().build();

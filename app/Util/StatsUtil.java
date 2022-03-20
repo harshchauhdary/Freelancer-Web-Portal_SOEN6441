@@ -15,6 +15,7 @@ import java.util.regex.*;
 public class StatsUtil {
     /**
      * Calculates word statistics from a list of strings.
+     * @author Harsh 40201627
      * @param disc_list List of preview descriptions of the projects.
      * @return Returns a Map&lt;String, Long&gt; containing words as keys and their frequency as values
      * @see Project
@@ -42,6 +43,7 @@ public class StatsUtil {
 
     /**
      * Sorts map by value in descending order using LinkedHashMap(as it stores in same order as insertion)
+     * @author Harsh 40201627
      * @param stats Map&lt;String, Long&gt; containing words as keys and their frequency as values
      * @return Returns a LinkedHashMap&lt;String, Long&gt; containing sorted statistics
      */

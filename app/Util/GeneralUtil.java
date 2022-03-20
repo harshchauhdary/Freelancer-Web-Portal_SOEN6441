@@ -126,7 +126,14 @@ public class GeneralUtil {
 
     }
 
-
+    /**
+     * Extracts preview_descriptions form a given JSON response.
+     * @author Harsh 40201627
+     * @param response JSON response received from the api.
+     * @return returns a List of Strings containing preview descriptions.
+     * @throws ParseException
+     * @see Project
+     */
     public static List<String> getDescriptionFromJson(String response) throws ParseException {
         JSONParser parser = new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);

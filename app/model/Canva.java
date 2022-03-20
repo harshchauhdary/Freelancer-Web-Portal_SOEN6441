@@ -21,6 +21,9 @@ public class Canva {
      */
     private List<Project> projects;
 
+    public Canva() {
+
+    }
 
 
     /**

@@ -33,14 +33,24 @@ public class UserUtil {
         JSONParser parser=new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);
         JSONObject jsonObject=(JSONObject) jObj.get("result");
+        JSONObject jsonObject1=(JSONObject) jsonObject.get("location");
+        JSONObject jsonObject2=(JSONObject)jsonObject1.get("country");
+        JSONObject jsonObject3=(JSONObject)jsonObject.get("status");
+        JSONObject jsonObject4=(JSONObject)jsonObject.get("primary_currency");
 
 
         String username= (String) jsonObject.get("username");
         long id = (long) jsonObject.get("id");
+        long reg_date=(long)jsonObject.get("registration_date");
+        boolean limited_account=(boolean) jsonObject.get("limited_account");
         String display_name = (String) jsonObject.get("display_name");
         String role = (String) jsonObject.get("role");
+        String chosen_role=(String)jsonObject.get("chosen_role");
+        String country=(String)jsonObject2.get("name");
+        boolean email_verified=(boolean)jsonObject3.get("email_verified");
+        String primary_currency=(String)jsonObject4.get("name");
 
-        User user_obj=new User(id,username,display_name,role);
+        User user_obj=new User(id,username,display_name,role,reg_date,limited_account,chosen_role,country,email_verified,primary_currency);
 
         String url="https://www.freelancer.com/api/projects/0.1/projects";
         HashMap<String,String> params = new HashMap<>();
