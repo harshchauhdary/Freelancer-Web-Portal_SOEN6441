@@ -1,6 +1,7 @@
 package controllers;
 
 import Util.DescriptionUtil;
+import Util.UserUtil;
 import model.Canva;
 import model.Project;
 import model.Query;
@@ -12,7 +13,7 @@ import play.data.FormFactory;
 import play.libs.ws.WSClient;
 import play.mvc.*;
 import play.cache.*;
-import org.mockito.Mockito.*;
+//import org.mockito.Mockito.*;
 import Util.GeneralUtil;
 import Util.StatsUtil;
 import javax.inject.Inject;
@@ -154,7 +155,7 @@ public class HomeController extends Controller {
     public Result user(String id) throws IOException, ParseException, ExecutionException, InterruptedException {
         String url = "https://www.freelancer.com/api/users/0.1/users/" + id;
         String jsonRespone = GeneralUtil.getJsonResponseFromUrl(url, null, ws,cache);
-        User user = GeneralUtil.getUserFromJson(jsonRespone, ws,cache);
+        User user = UserUtil.getUserFromJson(jsonRespone, ws,cache);
         return ok(views.html.Home.user.render(user));
     }
 
