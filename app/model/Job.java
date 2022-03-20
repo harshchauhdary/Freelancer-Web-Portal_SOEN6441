@@ -33,6 +33,10 @@ public class Job {
         this.job_name = job_name;
     }
 
+    public Job() {
+
+    }
+
     /**
      * Getter method used to access the Job_ID of a particular job.
      * @return the job_id with type long

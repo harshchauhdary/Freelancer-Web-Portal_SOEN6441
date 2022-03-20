@@ -54,9 +54,12 @@ public class HomeControllerTest extends WithApplication {
 
     @Test
     public void testIndiStats() {
-        RequestBuilder request = Helpers.fakeRequest().method(GET).uri("/stats/I%20usi");
+        RequestBuilder request = Helpers.fakeRequest().method(GET).uri("/stats/some%20description&");
         Result result = route(app, request);
         assertEquals(OK, result.status());
+        assertEquals("text/html", result.contentType().get());
+        assertEquals("utf-8", result.charset().get());
+
     }
 
     private WSClient ws;
@@ -107,9 +110,9 @@ public class HomeControllerTest extends WithApplication {
 
             RequestBuilder request = Helpers.fakeRequest().method(GET).uri("/stats/all/react-native");
             Result result = route(app, request);
-            System.out.println(contentAsString(result));
             assertEquals(OK, result.status());
-
+            assertEquals("text/html", result.contentType().get());
+            assertEquals("utf-8", result.charset().get());
         }
     }
 

@@ -1,19 +1,12 @@
 package Util;
 
-import junit.framework.TestCase;
+import model.Job;
 import model.Project;
-import model.User;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import play.cache.SyncCacheApi;
 import play.libs.ws.WSClient;
-import play.mvc.Http;
-import play.mvc.Result;
-import play.mvc.With;
-import play.test.Helpers;
 import play.test.WithApplication;
 
 import java.io.File;
@@ -22,13 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 import static org.junit.Assert.*;
-import static play.mvc.Http.Status.OK;
-import static play.test.Helpers.POST;
-import static play.test.Helpers.route;
 
 public class GeneralUtilTest extends WithApplication {
 
@@ -63,13 +51,34 @@ public class GeneralUtilTest extends WithApplication {
         String response2 = GeneralUtil.getJsonResponseFromUrl(url, null, ws, cache);
         assertTrue(response2.contains("status\":\"success"));
 
-
     }
 
     @Test
-    public void testGetProjectsFromJson() throws IOException {
+    public void testGetProjectsFromJson() throws Exception {
+        String json = getJsonFileAsString(File.separator + "test" + File.separator + "resources" + File.separator + "projects2.json");
+        List<Project> projects = new ArrayList<Project>();
+        Project p = new Project();
+        p.setId(33256190);
+        p.setOwnerID(33256190);
+        p.setTitle("Build me a website");
+        p.setDesc("Website");
+        p.setTimeSubmitted(new Date((1647794291)));
+        p.setType("fixed");
+        List<Job> jobs = new ArrayList<Job>();
+        Job j = new Job(3,"PHP");
+        jobs.add(j);
+        p.setSkills(jobs);
+        projects.add(p);
+        Project p1 = GeneralUtil.getProjectsFromJson(json).get(0);
+        assertEquals(p.getId(),p1.getId());
+        assertEquals(p.getTitle(),p1.getTitle());
+        assertEquals(p.getOwnerID(),p1.getOwnerID());
+        assertEquals(p.getType(),p1.getType());
+        assertEquals(p.getSkills().get(0).getJob_id(),p1.getSkills().get(0).getJob_id());
+        assertEquals(p.getSkills().get(0).getJob_name(),p1.getSkills().get(0).getJob_name());
 
     }
+
 
     @Test
     public void testGetDescriptionFromJson() throws Exception{
@@ -78,10 +87,6 @@ public class GeneralUtilTest extends WithApplication {
         l.add("description one");
         l.add("description two");
         assertEquals(GeneralUtil.getDescriptionFromJson(json), l);
-
-        String empty_json = "";
-        List<String> empty_l = new ArrayList<>();
-        assertEquals(GeneralUtil.getDescriptionFromJson(empty_json), empty_l);
     }
 
     @Test

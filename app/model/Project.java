@@ -191,8 +191,13 @@ public class Project {
      */
     public long getId() {
         return this.id;
+    } /**
+     * Getter Method, used to obtain the Unique ID of the Project
+     * @return Unique ID of the project.
+     */
+    public void setId(long id) {
+         this.id = id;
     }
-
     /**
      * Getter Method, used to obtain the description of the project
      * @return Description of the Project
@@ -200,7 +205,13 @@ public class Project {
     public String getDesc() {
         return this.description;
     }
-
+    /**
+     * Getter Method, used to obtain the description of the project
+     * @return Description of the Project
+     */
+    public void setDesc(String desc) {
+         this.description = desc;
+    }
     /**
      * Getter Method, used to obtain the readability Indices of the project
      * @return Readability Index of the project
