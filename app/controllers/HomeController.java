@@ -11,7 +11,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.libs.ws.WSClient;
 import play.mvc.*;
-
+import play.cache.*;
 import org.mockito.Mockito.*;
 import Util.GeneralUtil;
 import Util.StatsUtil;
@@ -34,16 +34,19 @@ public class HomeController extends Controller {
     private final WSClient ws;
     private final FormFactory formFactory;
     private final MessagesApi messagesApi;
+    private SyncCacheApi cache;
+
 
     private HashMap<String, List<Canva>> browsers;
 
     // private String session;
     @Inject
-    public HomeController(WSClient ws, FormFactory formFactory, MessagesApi messagesApi) {
+    public HomeController(WSClient ws, FormFactory formFactory, MessagesApi messagesApi, SyncCacheApi cache) {
         this.ws = ws;
         this.formFactory = formFactory;
         this.messagesApi = messagesApi;
         this.browsers = new HashMap<>();
+        this.cache = cache;
         // this.session = "sahil"
     }
 
@@ -58,6 +61,10 @@ public class HomeController extends Controller {
             Collections.reverse(canvas);
             return ok(views.html.Home.index.render(canvas, queryForm, messagesApi.preferred(request))).addingToSession(request, "user", id);
         } else {
+            if(this.browsers.get(user.get()) == null){
+                this.browsers.put(user.get(), new ArrayList<>());
+            }
+
             canvas.addAll(this.browsers.get(user.get()));
             Collections.reverse(canvas);
             return ok(views.html.Home.index.render(canvas, queryForm, messagesApi.preferred(request)));
@@ -79,7 +86,7 @@ public class HomeController extends Controller {
         params.put("compact", "false");
         params.put("limit", "10");
 
-        String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url, params, ws);
+        String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url, params, ws,cache);
         List<Project> projects = DescriptionUtil.getReadabilityIndex(GeneralUtil.getProjectsFromJson(jsonResponse));
         if (projects.size() == 0) {
             return ok(views.html.Home.error.render("No projects found"));
@@ -91,6 +98,12 @@ public class HomeController extends Controller {
             return ok(views.html.Home.error.render("no user found"));
         }
         List<Canva> clist = this.browsers.get(user.get());
+
+        boolean checkIfPresent = clist.stream().map(Canva::getTitle).anyMatch(r -> r.equals(c.getTitle()));
+
+        if(checkIfPresent){
+            return redirect(routes.HomeController.index());
+        }
         if (clist.size() == 10) {
             clist.clear();
         }
@@ -118,7 +131,8 @@ public class HomeController extends Controller {
         params.put("jobs[]", jobId);
         params.put("limit", "10");
 
-        String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url, params, ws);
+        String jsonResponse = GeneralUtil.getJsonResponseFromUrl(url, params, ws,cache);
+
 
         List<Project> projects = DescriptionUtil.getReadabilityIndex(GeneralUtil.getProjectsFromJson(jsonResponse));
         Double averageIndex = DescriptionUtil.getAverageReadabilityIndex(projects);
@@ -139,8 +153,8 @@ public class HomeController extends Controller {
      */
     public Result user(String id) throws IOException, ParseException, ExecutionException, InterruptedException {
         String url = "https://www.freelancer.com/api/users/0.1/users/" + id;
-        String jsonRespone = GeneralUtil.getJsonResponseFromUrl(url, null, ws);
-        User user = GeneralUtil.getUserFromJson(jsonRespone, ws);
+        String jsonRespone = GeneralUtil.getJsonResponseFromUrl(url, null, ws,cache);
+        User user = GeneralUtil.getUserFromJson(jsonRespone, ws,cache);
         return ok(views.html.Home.user.render(user));
     }
 
@@ -163,14 +177,14 @@ public class HomeController extends Controller {
         params.put("sort_field", "time_updated");
         params.put("compact", "false");
         params.put("offset", "0");
-        String response1 = GeneralUtil.getJsonResponseFromUrl(url, params, ws);
+        String response1 = GeneralUtil.getJsonResponseFromUrl(url, params, ws,cache);
         params.remove("offset");
         params.put("offset", "100");
-        String response2 = GeneralUtil.getJsonResponseFromUrl(url, params, ws);
+        String response2 = GeneralUtil.getJsonResponseFromUrl(url, params, ws,cache);
         params.remove("offset");
         params.put("offset", "200");
         params.put("limit", "50");
-        String response3 = GeneralUtil.getJsonResponseFromUrl(url, params, ws);
+        String response3 = GeneralUtil.getJsonResponseFromUrl(url, params, ws,cache);
         result.addAll(GeneralUtil.getDescriptionFromJson(response1));
         result.addAll(GeneralUtil.getDescriptionFromJson(response2));
         result.addAll(GeneralUtil.getDescriptionFromJson(response3));

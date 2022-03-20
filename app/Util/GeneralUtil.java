@@ -1,5 +1,6 @@
 package Util;
 import com.fasterxml.jackson.databind.JsonNode;
+import play.cache.SyncCacheApi;
 import play.libs.ws.*;
 import model.Job;
 import  model.Project;
@@ -52,7 +53,7 @@ public class GeneralUtil {
      * @see <a href="https://www.google.com/url?q=https://www.freelancer.com/api&sa=D&source=editors&ust=1647564305189643&usg=AOvVaw1Hch_j-vbGsnR5Jyo4-TK8">Freelancer api<a/>
      * @see <a href="https://www.playframework.com/documentation/2.8.x/ScalaWS">Play Ws<a/>
      */
-    public static String getJsonResponseFromUrl(String url, HashMap<String, String> params,WSClient ws) throws IOException, ExecutionException, InterruptedException {
+    public static String getJsonResponseFromUrl(String url, HashMap<String, String> params, WSClient ws,SyncCacheApi cache) throws IOException, ExecutionException, InterruptedException {
         String param = "?";
         String fullURl;
         if(params!=null)
@@ -67,9 +68,17 @@ public class GeneralUtil {
         else {
             fullURl = url;
         }
+        Optional<String> r = cache.get(fullURl);
+        if(r.isPresent()){
+            System.out.println("hello");
+           return r.get();
+        }
+
         CompletableFuture<JsonNode> response = ws.url(fullURl)
                 .get().thenApply(WSResponse::asJson).toCompletableFuture();
-        return response.get().toString();
+        String re = response.get().toString();
+        cache.set(fullURl , re);
+        return re;
     }
 
     /**
@@ -145,7 +154,7 @@ public class GeneralUtil {
      * @see Project
      */
 
-    public static User getUserFromJson(String response,WSClient ws) throws ParseException, IOException, ExecutionException, InterruptedException {
+    public static User getUserFromJson(String response,WSClient ws,SyncCacheApi cache) throws ParseException, IOException, ExecutionException, InterruptedException {
         JSONParser parser=new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);
         JSONObject jsonObject=(JSONObject) jObj.get("result");
@@ -164,7 +173,7 @@ public class GeneralUtil {
         params.put("full_description","true");
         params.put("job_details","true");
         params.put("limit","10");
-        String data=getJsonResponseFromUrl(url,params,ws);
+        String data=getJsonResponseFromUrl(url,params,ws,cache);
         List<Project> projects=DescriptionUtil.getReadabilityIndex(getProjectsFromJson(data));
         user_obj.setProjects(projects);
 

@@ -281,16 +281,16 @@ public class User {
      * @param primary_currency currency value of user
      */
 
-    public User(long id, String username, String display_name,String role,long reg_date,boolean limited_account,String chosen_role,String country,boolean email_verified,String primary_currency){
+    public User(long id, String username, String display_name,String role){
         this.id=id;
         this.username=username;
         this.display_name=display_name;
         this.role=role;
-        this.reg_date=reg_date;
-        this.limited_account=limited_account;
-        this.chosen_role=chosen_role;
-        this.country=country;
-        this.email_verified=email_verified;
-        this.primary_currency=primary_currency;
+       // this.reg_date=reg_date;
+       // this.limited_account=limited_account;
+      //  this.chosen_role=chosen_role;
+//        this.country=country;
+//        this.email_verified=email_verified;
+//        this.primary_currency=primary_currency;
     }
 }
