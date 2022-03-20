@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Represents the project entity abtained from the freelancer api
  *
- * @author Sahil Munj
+ * @author Sahil_40192697 Munj
  */
 public class Project {
     /**
@@ -195,8 +195,8 @@ public class Project {
     public long getId() {
         return this.id;
     } /**
-     * Getter Method, used to obtain the Unique ID of the Project
-     * @return Unique ID of the project.
+     * Setter Method, used to set the Unique ID of the Project
+     * @param id id to be set
      */
     public void setId(long id) {
          this.id = id;
@@ -209,8 +209,8 @@ public class Project {
         return this.description;
     }
     /**
-     * Getter Method, used to obtain the description of the project
-     * @return Description of the Project
+     * setter Method, used to set the description of the project
+     * @param desc description to be set
      */
     public void setDesc(String desc) {
          this.description = desc;
@@ -229,7 +229,6 @@ public class Project {
      * @param index Readability Index of type int
      * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
      */
-
     public void setReadabilityIndex(int index) {
         this.readabilityIndex = index;
     }
@@ -246,7 +245,6 @@ public class Project {
      * Getter Method, used to obtain the education level required for the projects.
      * @return Education level required for the project.
      */
-
     public String getEducationLevel() {
         return this.educationLevel;
     }

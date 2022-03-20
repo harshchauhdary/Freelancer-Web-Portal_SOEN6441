@@ -23,6 +23,9 @@ import static org.junit.Assert.*;
 
 public class GeneralUtilTest extends WithApplication {
 
+    /**
+     * Tests that the custom Executor created in a static block is not null, using assertNotNull.
+     */
     @Test
     public void testGetExecutor() {
        assertNotNull(GeneralUtil.getExecutor());
@@ -31,12 +34,19 @@ public class GeneralUtilTest extends WithApplication {
     private WSClient ws;
     private SyncCacheApi cache;
 
+    /**
+     * Injection method to inject WsCache
+     */
     @Before
     public void injectWsCache() {
         ws = app.injector().instanceOf(WSClient.class);
         cache = app.injector().instanceOf(SyncCacheApi.class);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetJsonResponseFromUrl() throws Exception {
         String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";

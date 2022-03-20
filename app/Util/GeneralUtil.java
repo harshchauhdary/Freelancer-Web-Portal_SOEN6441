@@ -46,7 +46,7 @@ public class GeneralUtil {
     /**
      * Gets the json String using the url and params passed.It makes  asynchronous call to the freelance api with the url constructed and
      * returns the json response fetched from the api.It uses ws service of plat framework for the asynchronus call
-     * @author Sahil
+     * @author Sahil_40192697
      * @param url base url
      * @param params parameter to be added to the url
      * @param ws Wsclient used for sending the request asynchronous
@@ -152,7 +152,13 @@ public class GeneralUtil {
         return collect.stream().map(CompletableFuture::join).collect(Collectors.toList());
     }
 
-
+    /**
+     * Used to create a String id which is unique to every browsers.It takes the set of all id uptil now and then genera
+     * -tes the id using the random.
+     * @param ids set of unique ids of browsers
+     * @return Unique id generated for browser.
+     * @author Sahil_40192697
+     */
     public static String generateId(Set<String> ids){
         boolean check = true;
 

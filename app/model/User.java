@@ -293,5 +293,9 @@ public class User {
         this.email_verified=email_verified;
         this.primary_currency=primary_currency;
     }
+
+    /**
+     * Constructor for test case
+     */
     public User(){}
 }
