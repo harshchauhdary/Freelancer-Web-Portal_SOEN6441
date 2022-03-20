@@ -14,10 +14,8 @@ import play.libs.ws.WSClient;
 import play.test.Helpers;
 import play.twirl.api.Content;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 import junit.framework.TestCase;
 import scala.App;
 
@@ -118,7 +116,8 @@ public class viewsTest extends TestCase{
 //
 //
 //    }
-   @Test
+
+    @Test
     public void testUser(){
         User u=new User();
        List<Project> projects = new ArrayList<Project>();
@@ -141,5 +140,17 @@ public class viewsTest extends TestCase{
        assertEquals("text/html", html1.contentType());
        assertTrue(contentAsString(html1).contains("User"));
 
+    }
+
+    @Test
+    public void testStats(){
+        LinkedHashMap<String, Long> stats = new LinkedHashMap<String, Long>()  {{
+            put("description", new Long(457));
+            put("one", new Long(54));
+            put("two", new Long(23));
+        }};
+        Content html = views.html.Home.stats.render(stats);
+        assertEquals("text/html", html.contentType());
+        assertTrue(contentAsString(html).contains("Word Statistics"));
     }
 }

@@ -56,6 +56,9 @@ public class Project {
      */
     private String title;
 
+    public <E> Project(int i, String s, String s1, int i1, ArrayList<E> es, String hourly) {
+    }
+
     /**
      *Getter Method to access the fkgl Index, of the type Int
      * @see <a href="https://www.google.com/url?q=https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests&sa=D&source=editors&ust=1647564305226163&usg=AOvVaw3bwQ9Dl_E-VdqhapgkmnBC">FKGL</a>

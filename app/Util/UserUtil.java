@@ -61,7 +61,7 @@ public class UserUtil {
         String data=getJsonResponseFromUrl(url,params,ws,cache);
         List<Project> projects=DescriptionUtil.getReadabilityIndex(getProjectsFromJson(data));
         user_obj.setProjects(projects);
-
+        System.out.println(user_obj.getId());
         return user_obj;
     }
 }

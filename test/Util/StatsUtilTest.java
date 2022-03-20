@@ -26,7 +26,7 @@ public class StatsUtilTest extends TestCase {
 
     @Test
     public void testSortStats() {
-        Map<String, Long> sorted = new LinkedHashMap<String, Long>()  {{
+        LinkedHashMap<String, Long> sorted = new LinkedHashMap<String, Long>()  {{
             put("description", new Long(457));
             put("one", new Long(54));
             put("two", new Long(23));

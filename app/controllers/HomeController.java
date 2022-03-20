@@ -73,10 +73,6 @@ public class HomeController extends Controller {
         }
 
     }
-    public Result logout(Http.Request request){
-        this.browsers.remove(request.session().get("user").get());
-        return redirect(routes.HomeController.index()).removingFromSession(request,"user");
-    }
     public Result home(Http.Request request) throws IOException, ExecutionException, InterruptedException, ParseException {
         Form<Query> queryForm = formFactory.form(Query.class);
         Query q = queryForm.bindFromRequest(request).get();
@@ -137,6 +133,7 @@ public class HomeController extends Controller {
 
         List<Project> projects = DescriptionUtil.getReadabilityIndex(GeneralUtil.getProjectsFromJson(jsonResponse));
         Double averageIndex = DescriptionUtil.getAverageReadabilityIndex(projects);
+
         return ok(views.html.Home.skills.render(projects, averageIndex));
 
 
@@ -160,10 +157,10 @@ public class HomeController extends Controller {
     }
 
     /**
-     * Action for Global Statistics
+     * Action for displaying statistics of 250 projects for a given query.
      *
      * @param query Search query to show statistics for
-     * @return Displays statistics of 250 projects for a given query
+     * @return Renders statistics html page
      * @throws IOException
      * @throws ParseException
      * @author Harsh
@@ -194,10 +191,10 @@ public class HomeController extends Controller {
     }
 
     /**
-     * Action for
+     * Action for displaying statistics of a given project.
      *
-     * @param description
-     * @return
+     * @param description preview_description of a project
+     * @return Renders page displaying statistics for a single project
      * @throws IOException
      * @throws ParseException
      */

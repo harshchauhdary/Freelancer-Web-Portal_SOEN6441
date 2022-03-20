@@ -2,9 +2,12 @@ package Util;
 
 import model.Job;
 import model.Project;
+import model.User;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import play.cache.SyncCacheApi;
 import play.libs.ws.WSClient;
 import play.test.WithApplication;
@@ -91,31 +94,42 @@ public class GeneralUtilTest extends WithApplication {
 
     @Test
     public void testGetUserFromJson() throws IOException, ParseException, ExecutionException, InterruptedException {
-//        String url="https://www.freelancer.com/api/projects/0.1/projects";
-//        HashMap<String,String> params = new HashMap<>();
-//        params.put("owners[]",Long.toString(36471202));
-//        params.put("full_description","true");
-//        params.put("job_details","true");
-//        params.put("limit","10");
-//        String json = getJsonFileAsString(File.separator + "test" + File.separator + "resources" + File.separator + "User.json");
-//      //  User ex_user = new User();
-//        List<Project> projects = new ArrayList<>();
-//      //  Project p = new Project();
-//        projects.add(p);
-//        ex_user.setProjects(projects);
-//        try (MockedStatic<GeneralUtil> utilities = Mockito.mockStatic(GeneralUtil.class)) {
-//            try (MockedStatic<DescriptionUtil> utilities2 = Mockito.mockStatic(DescriptionUtil.class)) {
-//                utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, params, ws, cache))
-//                        .thenReturn("s");
-//                utilities.when(() -> GeneralUtil.getProjectsFromJson("s"))
-//                        .thenReturn(projects);
-//                utilities2.when(() -> DescriptionUtil.getReadabilityIndex(projects))
-//                        .thenReturn(projects);
-//
-//                User user = UserUtil.getUserFromJson(json,ws,cache);
-//                assertEquals(ex_user.getId(),user.getId());
-//            }
-//        }
+        String url="https://www.freelancer.com/api/projects/0.1/projects";
+        HashMap<String,String> params = new HashMap<>();
+        params.put("owners[]",Long.toString(32136579));
+        params.put("full_description","true");
+        params.put("job_details","true");
+        params.put("limit","10");
+        String json = getJsonFileAsString(File.separator + "test" + File.separator + "resources" + File.separator + "User.json");
+        User ex_user = new User(32136579,"san6123","san6123","freelancer",1542651206,false,"freelancer","India",false,"Indian Rupee");
+        List<Project> projects = new ArrayList<>();
+        List<Job> jobs=new ArrayList<>();
+        Job job=new Job(1234,"abcd");
+        Project p = new Project(32136579,"Hi Igor K., I noticed your profile and would like to offer you my project. We can discuss any details over chat.","Project for Igor K.",1637238113,new ArrayList<>(),"hourly");
+        projects.add(p);
+        ex_user.setProjects(projects);
+        try (MockedStatic<GeneralUtil> utilities = Mockito.mockStatic(GeneralUtil.class)) {
+            try (MockedStatic<DescriptionUtil> utilities2 = Mockito.mockStatic(DescriptionUtil.class)) {
+                utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, params, ws, cache))
+                        .thenReturn("s");
+                utilities.when(() -> GeneralUtil.getProjectsFromJson("s"))
+                        .thenReturn(projects);
+                utilities2.when(() -> DescriptionUtil.getReadabilityIndex(projects))
+                        .thenReturn(projects);
+
+                User user = UserUtil.getUserFromJson(json, ws, cache);
+                assertEquals(ex_user.getId(), user.getId());
+                assertEquals(ex_user.getUsername(), user.getUsername());
+                assertEquals(ex_user.getDisplay_name(), user.getDisplay_name());
+                assertEquals(ex_user.getCountry(), user.getCountry());
+                assertEquals(ex_user.getEmail_verified(), user.getEmail_verified());
+                assertEquals(ex_user.getLimited_account(), user.getLimited_account());
+                assertEquals(ex_user.getProjects().size(), user.getProjects().size());
+                assertEquals(ex_user.getReg_date(), user.getReg_date());
+                assertEquals(ex_user.getChosen_role(), user.getChosen_role());
+                assertEquals(ex_user.getRole(), user.getRole());
+            }
+        }
 
     }
 

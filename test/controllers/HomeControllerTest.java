@@ -1,9 +1,11 @@
 package controllers;
 
 import Util.DescriptionUtil;
+import Util.UserUtil;
 import controllers.HomeController;
 import model.Job;
 import model.Project;
+import model.User;
 import org.junit.Before;
 import play.cache.SyncCacheApi;
 import play.libs.ws.WSClient;
@@ -48,8 +50,61 @@ public class HomeControllerTest extends WithApplication {
                 .method(GET)
                 .uri("/");
 
+        Http.RequestBuilder request1 = new Http.RequestBuilder()
+                .method(GET)
+                .uri("/");
+        request1.session("user","hdalkhdlkjdla");
         Result result = route(app, request);
+        Result result1 = route(app, request1);
+
         assertEquals(OK, result.status());
+        assertEquals(OK, result1.status());
+
+    }
+
+    @Test
+    public void testHome() throws Exception{
+        String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
+        Job j = new Job(1234, "test");
+        List<Job> job = new ArrayList<Job>();
+        job.add(j);
+        Project p = new Project(1234,"test","test", new Date(),1234, job, "test");
+        List<Project> projects = new ArrayList<Project>();;
+        projects.add(p);
+        String json = getJsonFileAsString(File.separator + "test" + File.separator + "resources" + File.separator + "projects.json");
+        HashMap<String, String> params = new HashMap<>();
+        params.put("query", null);
+        params.put("job_details", "true");
+        params.put("compact", "false");
+        params.put("limit", "10");
+
+        try (MockedStatic<GeneralUtil> utilities = Mockito.mockStatic(GeneralUtil.class)) {
+            try (MockedStatic<DescriptionUtil> utilities2 = Mockito.mockStatic(DescriptionUtil.class)) {
+                utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, params, ws, cache))
+                        .thenReturn(json);
+                utilities.when(() -> GeneralUtil.getProjectsFromJson(json))
+                        .thenReturn(projects);
+                utilities2.when(() -> DescriptionUtil.getReadabilityIndex(projects))
+                        .thenReturn(projects);
+
+                RequestBuilder request = Helpers.fakeRequest().method(POST).uri("/");
+                Result result = route(app, request);
+                assertEquals(OK, result.status());
+
+                Http.RequestBuilder request1 = new Http.RequestBuilder()
+                        .method(GET)
+                        .uri("/");
+                request1.session("user","hdalkhdlkjdla");
+                Result result1 = route(app, request1);
+
+                Http.RequestBuilder request2 = new Http.RequestBuilder()
+                        .method(POST)
+                        .uri("/");
+                request2.session("user","hdalkhdlkjdla");
+                Result result2 = route(app, request2);
+                assertEquals(303, result2.status());
+            }
+        }
     }
 
     @Test
@@ -134,50 +189,30 @@ public class HomeControllerTest extends WithApplication {
     }
 
     @Test
-    public void testUser(){
-        String url="https://www.freelancer.com/api/users/0.1/users/32136579";
-        try (MockedStatic<GeneralUtil> utilities = Mockito.mockStatic(GeneralUtil.class)) {
-            HashMap<String,String> params = new HashMap<>();
-            utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, params, ws, cache))
-                    .thenReturn("");
-            RequestBuilder request = Helpers.fakeRequest().method(GET).uri("/user/32136579");
-            Result result = route(app, request);
-           //System.out.println(contentAsString(result));
-            assertEquals(OK, result.status());
-        }
-    }
-
-    @Test
-    public void testHome() throws Exception{
-        String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
+    public void testUser() throws IOException {
+        String url = "https://www.freelancer.com/api/users/0.1/users/32136579";
+//        String json = getJsonFileAsString(File.separator + "test" + File.separator + "resources" + File.separator + "User.json");
+        User user = new User(32136579, "san6123", "san6123", "employer", 1542651206, false, "employer", "India", true, "Rupee");
         Job j = new Job(1234, "test");
         List<Job> job = new ArrayList<Job>();
         job.add(j);
         Project p = new Project(1234,"test","test", new Date(),1234, job, "test");
         List<Project> projects = new ArrayList<Project>();;
         projects.add(p);
-        String json = getJsonFileAsString(File.separator + "test" + File.separator + "resources" + File.separator + "projects.json");
-        HashMap<String, String> params = new HashMap<>();
-        params.put("query", null);
-        params.put("job_details", "true");
-        params.put("compact", "false");
-        params.put("limit", "10");
-
+        user.setProjects(projects);
         try (MockedStatic<GeneralUtil> utilities = Mockito.mockStatic(GeneralUtil.class)) {
-            try (MockedStatic<DescriptionUtil> utilities2 = Mockito.mockStatic(DescriptionUtil.class)) {
-                utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, params, ws, cache))
-                        .thenReturn(json);
-                utilities.when(() -> GeneralUtil.getProjectsFromJson(json))
-                        .thenReturn(projects);
-                utilities2.when(() -> DescriptionUtil.getReadabilityIndex(projects))
-                        .thenReturn(projects);
+            try (MockedStatic<UserUtil> utilities2 = Mockito.mockStatic(UserUtil.class)) {
 
-                RequestBuilder request = Helpers.fakeRequest().method(POST).uri("/");
+                utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, null, ws, cache))
+                        .thenReturn(" ");
+                utilities2.when(() -> UserUtil.getUserFromJson(" ", ws, cache)).thenReturn(user);
+                RequestBuilder request = Helpers.fakeRequest().method(GET).uri("/user/32136579");
                 Result result = route(app, request);
                 assertEquals(OK, result.status());
             }
         }
     }
+
 
     public static String getJsonFileAsString(String path) throws IOException {
         String filePath = new File("").getAbsolutePath();
