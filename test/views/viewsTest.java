@@ -1,29 +1,29 @@
 package views;
 
-import model.Job;
-import model.Project;
-import model.User;
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 import play.Application;
 import play.data.Form;
 import play.data.FormFactory;
-import play.i18n.Messages;
 import play.i18n.MessagesApi;
-import play.libs.ws.WSClient;
+
+import play.mvc.Http;
 import play.test.Helpers;
+import play.test.WithApplication;
 import play.twirl.api.Content;
 
 import java.util.*;
 
-import junit.framework.TestCase;
-import scala.App;
+
 
 import javax.inject.Inject;
 
+import static junit.framework.TestCase.*;
+import static play.test.Helpers.GET;
 import static play.test.Helpers.contentAsString;
 
-public class viewsTest extends TestCase{
+public class viewsTest extends WithApplication {
 
     @Test
     public void testSkills(){
@@ -56,7 +56,7 @@ public class viewsTest extends TestCase{
         assertTrue(contentAsString(html).contains("projects"));
 
     }
-
+    @Test
     public void testError(){
         Content html = views.html.Home.error.render("No projects found");
         assertEquals("text/html", html.contentType());
@@ -64,58 +64,53 @@ public class viewsTest extends TestCase{
 
     }
 
-//    private Form ff;
-//    private Messages m;
-////    @Before
-////    public void injectFormFactory(){
-////        Application app = Helpers.fakeApplication();
-////        FormFactory ff  = app.injector().instanceOf(FormFactory.class);
-////
-////    }
-//
-//    @Inject
-//    private FormFactory formFactory;
-//    @Before
-//    public void injectMessage(){
-//        Application app = Helpers.fakeApplication();
-//        Messages m = app.injector().instanceOf(Messages.class);
-//    }
-//    @Test
-//    public void testIndex(){
-//
-//        Application app = Helpers.fakeApplication();
-//        FormFactory formFactory  = app.injector().instanceOf(FormFactory.class);
-//        Form<Query> f = formFactory.form(Query.class);
-//        List<Canva> canva = new ArrayList<Canva>();
-//        Canva c = new Canva();
-//        List<Project> projects = new ArrayList<Project>();
-//        Project p = new Project();
-//        Job j = new Job(3,"PHP");
-//        List<Job> job = new ArrayList<Job>();
-//        job.add(j);
-//        p.setEducationLevel("test");
-//        p.setDesc("Test");
-//        p.setSkills(job);
-//        p.setId(12345);
-//        p.setReadabilityIndex(12);
-//        p.setType("fixed");
-//        p.setTitle("test");
-//        p.setOwnerID(123456);
-//        p.setTimeSubmitted(new Date());
-//        p.setFkglIndex(1234);
-//        projects.add(p);
-//        c.setTitle("Test");
-//        c.setAverageIndex(12);
-//        c.setProjects(projects);
-//        canva.add(c);
-//
-//        Content html = views.html.Home.index.render(canva,f, m);
-//        //List<Project> projects1 = new ArrayList<Project>();
-//        assertEquals("text/html", html.contentType());
-//        assertTrue(contentAsString(html).contains("projects"));
-//
-//
-//    }
+    private FormFactory ff;
+    private MessagesApi m;
+    @Before
+    public void injectFormFactory(){
+
+         ff  = app.injector().instanceOf(FormFactory.class);
+        m = app.injector().instanceOf(MessagesApi.class);
+
+    }
+
+
+    @Test
+    public void testIndex(){
+
+        Application app = Helpers.fakeApplication();
+        FormFactory formFactory  = app.injector().instanceOf(FormFactory.class);
+        Form<Query> f = formFactory.form(Query.class);
+        List<Canva> canva = new ArrayList<Canva>();
+        Canva c = new Canva();
+        List<Project> projects = new ArrayList<Project>();
+        Project p = new Project();
+        Job j = new Job(3,"PHP");
+        List<Job> job = new ArrayList<Job>();
+        job.add(j);
+        p.setEducationLevel("test");
+        p.setDesc("Test");
+        p.setSkills(job);
+        p.setId(12345);
+        p.setReadabilityIndex(12);
+        p.setType("fixed");
+        p.setTitle("test");
+        p.setOwnerID(123456);
+        p.setTimeSubmitted(new Date());
+        p.setFkglIndex(1234);
+        projects.add(p);
+        c.setTitle("Test");
+        c.setAverageIndex(12);
+        c.setProjects(projects);
+        canva.add(c);
+        Http.RequestBuilder request = Helpers.fakeRequest().method(GET).uri("/");
+        Content html = views.html.Home.index.render(canva,f, m.preferred(request.build()));
+        //List<Project> projects1 = new ArrayList<Project>();
+        assertEquals("text/html", html.contentType());
+        assertTrue(contentAsString(html).contains("projects"));
+
+
+    }
 
     @Test
     public void testUser(){
