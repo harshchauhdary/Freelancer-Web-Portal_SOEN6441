@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Test class for User
+ */
 public class UserTest extends TestCase {
 
     /**

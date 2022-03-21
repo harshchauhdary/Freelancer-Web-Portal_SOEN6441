@@ -37,6 +37,9 @@ import static play.test.Helpers.*;
 
 import javax.inject.Inject;
 
+/**
+ * Test class for HomeController.
+ */
 public class HomeControllerTest extends WithApplication {
 
     @Override
@@ -44,6 +47,9 @@ public class HomeControllerTest extends WithApplication {
         return new GuiceApplicationBuilder().build();
     }
 
+    /**
+     * Test method for index
+     */
     @Test
     public void testIndex() {
         Http.RequestBuilder request = new Http.RequestBuilder()
@@ -61,6 +67,12 @@ public class HomeControllerTest extends WithApplication {
         assertEquals(OK, result1.status());
 
     }
+    /**
+     * Test method for home method of HomeController class
+     * Compares the attributes obtained from mock with the one passed static
+     * Mocks getJsonResponseFromUrl and getReadabiltityIndex of GeneralUtil class and makes the get request using requestbuilder
+     * @throws Exception
+     */
 
     @Test
     public void testHome() throws Exception{
@@ -106,6 +118,11 @@ public class HomeControllerTest extends WithApplication {
             }
         }
     }
+    /**
+     *  Test method for indiStats
+     *  Uses RequestBuilder to make http get request for stats uri
+     *  Uses assertEquals to test the response
+     */
 
     @Test
     public void testIndiStats() {
@@ -126,6 +143,12 @@ public class HomeControllerTest extends WithApplication {
         ws = app.injector().instanceOf(WSClient.class);
         cache = app.injector().instanceOf(SyncCacheApi.class);
     }
+    /**
+     * Test method for globalStats
+     * Mocks getJsonResponseFromUrl & getDescriptionFromJson of GeneralUtil class and makes the get request using requestbuilder
+     * Uses assertEquals to test the response
+     * @throws IOException
+     */
 
     @Test
     public void testGlobalStats() throws Exception {
@@ -170,6 +193,12 @@ public class HomeControllerTest extends WithApplication {
             assertEquals("utf-8", result.charset().get());
         }
     }
+    /**
+     * Test method for skills method of HomeController class
+     * Mocks getJsonResponseFromUrl of GeneralUtil class and makes the get request using requestbuilder
+     * Uses assertEquals to show the correct response
+     * @throws IOException
+     */
 
     @Test
     public void testSkills() {
@@ -187,6 +216,12 @@ public class HomeControllerTest extends WithApplication {
         }
 
     }
+    /**
+     * Test method for User method of HomeController class
+     * Mocks getJsonResponseFromUrl and getUserFromJson of GeneralUtil class and makes the get request using requestbuilder
+     * Uses assertEquals to show the correct response
+     * @throws IOException
+     */
 
     @Test
     public void testUser() throws IOException {
@@ -212,7 +247,12 @@ public class HomeControllerTest extends WithApplication {
             }
         }
     }
-
+    /**
+     * Reads a JSON file from path and returns content as a String
+     * @param path location of file that contains the JSON file
+     * @return returns the content as a String
+     * @throws IOException
+     */
 
     public static String getJsonFileAsString(String path) throws IOException {
         String filePath = new File("").getAbsolutePath();

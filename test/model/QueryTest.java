@@ -2,6 +2,9 @@ package model;
 
 import junit.framework.TestCase;
 
+/**
+ * Test class for Query
+ */
 public class QueryTest extends TestCase {
 
     /**

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Test class for Canva
+ */
 public class CanvaTest extends TestCase {
 
     /**

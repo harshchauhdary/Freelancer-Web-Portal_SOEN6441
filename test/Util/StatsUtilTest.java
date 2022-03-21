@@ -5,8 +5,16 @@ import org.junit.Test;
 
 import java.util.*;
 
+/**
+ * Test cases for class statsUtil
+ * @author Harsh 40201627
+ */
 public class StatsUtilTest extends TestCase {
 
+    /**
+     * Test case for StatsUtil.getStats method.It has 2 classes(List of descriptions and an empty arraylist).
+     * Checks if it returns correct statistics.
+     */
     @Test
     public void testGetStats() {
         Map<String, Long> stats = new HashMap<String, Long>()  {{
@@ -24,6 +32,10 @@ public class StatsUtilTest extends TestCase {
         assertEquals(empty_stats, StatsUtil.getStats(empty_descriptions));
     }
 
+    /**
+     * Test case for StatsUtil.sortStats method. Passes an unsorted Map and checks
+     * if it returns a sorted LinkedHashMap.
+     */
     @Test
     public void testSortStats() {
         LinkedHashMap<String, Long> sorted = new LinkedHashMap<String, Long>()  {{

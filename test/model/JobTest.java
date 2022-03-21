@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 
 import java.lang.reflect.Field;
 
+/**
+ * Test class for Job
+ */
 public class JobTest extends TestCase {
 
     /**

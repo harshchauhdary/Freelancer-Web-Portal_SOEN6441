@@ -165,9 +165,9 @@ public class viewsTest extends WithApplication {
     }
     /**
      * Test method for stats.scala.html
-     * Passes a linked hashmap of String type while rendering the page.
-     * assertEquals is used to check the contentType of the page
-     * assertTrue is used to check that the page is rendered properly.
+     * Passes a linked hashmap with keys of type String and values of type Long while rendering the page.
+     * assertEquals is used to test the contentType of the page
+     * assertTrue is used to verify the content
      */
     @Test
     public void testStats(){

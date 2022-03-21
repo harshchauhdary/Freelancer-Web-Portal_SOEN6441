@@ -21,6 +21,9 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test class for GeneralUtil
+ */
 public class GeneralUtilTest extends WithApplication {
 
     /**
