@@ -33,14 +33,32 @@ public class HomeController extends Controller {
      * Wsclient instance for asynchronous calling
      */
     private final WSClient ws;
+    /**
+     * FormFactory instance for creating form
+     */
     private final FormFactory formFactory;
+    /**
+     * MessageApi instance for messages
+     */
     private final MessagesApi messagesApi;
+    /**
+     * Cache instance for caching
+     */
     private SyncCacheApi cache;
 
-
+    /**
+     * User and their list of canvas
+     */
     private HashMap<String, List<Canva>> browsers;
 
-    // private String session;
+    /**
+     * Injects the required dependency using to inject of play framework
+     * @param ws
+     * @param formFactory
+     * @param messagesApi
+     * @param cache
+     * @see Inject
+     */
     @Inject
     public HomeController(WSClient ws, FormFactory formFactory, MessagesApi messagesApi, SyncCacheApi cache) {
         this.ws = ws;
@@ -48,10 +66,15 @@ public class HomeController extends Controller {
         this.messagesApi = messagesApi;
         this.browsers = new HashMap<>();
         this.cache = cache;
-        // this.session = "sahil"
     }
 
-
+    /**
+     * When user calls the home method from <code>routes<code/>,it takes the session of user from the request and then
+     * searches for it in the browsers list and then render the index view by passing the list of canva found in the browsers
+     * @param request request call
+     * @return Displays the home page of application with the recent searches
+     * @author Sahil_40192697
+     */
     public Result index(Http.Request request) {
         Optional<String> user = request.session().get("user");
         List<Canva> canvas = new ArrayList<>();
@@ -65,14 +88,23 @@ public class HomeController extends Controller {
             if(this.browsers.get(user.get()) == null){
                 this.browsers.put(user.get(), new ArrayList<>());
             }
-
             canvas.addAll(this.browsers.get(user.get()));
             Collections.reverse(canvas);
             return ok(views.html.Home.index.render(canvas, queryForm, messagesApi.preferred(request)));
-
         }
-
     }
+
+    /**
+     * When user enter the query in the search and submits this method id called and then it searches for the projects
+     * in the cache.If found it is added to the session found from the request else calls to api.
+     * @param request request call
+     * @return redirects to index after adding the new search results to the canvas list of user in the session
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     * @throws ParseException
+     * @author Sahil_40192697
+     */
     public Result home(Http.Request request) throws IOException, ExecutionException, InterruptedException, ParseException {
         Form<Query> queryForm = formFactory.form(Query.class);
         Query q = queryForm.bindFromRequest(request).get();

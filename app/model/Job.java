@@ -1,10 +1,6 @@
 
 
-/**
- @author: Munj Bhavesh Nayak
- This class is utilized in obtaining all the Jobs' names and their respective Job IDs, which are in
- turn stored in JSon File, which is then parsed using Job ID to select the required Jobs.
- */
+
 
 package model;
 
@@ -16,7 +12,11 @@ import org.json.simple.parser.ParseException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
-
+/**
+ @author: Munj Bhavesh Nayak
+ This class is utilized in obtaining all the Jobs' names and their respective Job IDs, which are in
+ turn stored in JSon File, which is then parsed using Job ID to select the required Jobs.
+ */
 public class Job {
 
     private long job_id;
@@ -33,6 +33,9 @@ public class Job {
         this.job_name = job_name;
     }
 
+    /**
+     * Constructor for Test case
+     */
     public Job() {
 
     }
@@ -41,7 +44,6 @@ public class Job {
      * Getter method used to access the Job_ID of a particular job.
      * @return the job_id with type long
      */
-
     public long getJob_id() {
         return job_id;
     }
@@ -66,7 +68,6 @@ public class Job {
      * Setter Method, used to pass the necessary value to the Job Name
      * @param job_name A String which contains the name associated with the unique Job ID
      */
-
     public void setJob_name(String job_name) {
         this.job_name = job_name;
     }

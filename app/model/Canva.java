@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *Represents the canva which contains the title ,average readability index and list of 10 projects based on it
- * @author Sahil
+ * @author Sahil_40192697
  */
 public class Canva {
     /**
@@ -21,10 +21,12 @@ public class Canva {
      */
     private List<Project> projects;
 
+    /**
+     * Constructor for test case
+     */
     public Canva() {
 
     }
-
 
     /**
      * Gets the title of canva
@@ -33,12 +35,6 @@ public class Canva {
     public String getTitle() {
         return title;
     }
-
-
-
-
-
-
 
     /**
      * Sets the title of canva

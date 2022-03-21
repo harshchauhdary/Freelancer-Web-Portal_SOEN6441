@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Utility functions for computing the readability and average of all the readability index of all projects.
  *
- * @author Sahil
+ * @author Sahil_40192697
  */
 public class DescriptionUtil {
     /**
@@ -20,7 +20,7 @@ public class DescriptionUtil {
      *
      * @param projects List of all project for whom the readability index has to be calculated.
      * @return List of projects for whom the readability index is set as a property.
-     * @author Sahil
+     * @author Sahil_40192697
      * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
      * @see <a href="https://www.google.com/url?q=https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests&sa=D&source=editors&ust=1647564305226163&usg=AOvVaw3bwQ9Dl_E-VdqhapgkmnBC">FKGL</a>
      * @see Project
@@ -75,7 +75,7 @@ public class DescriptionUtil {
      *
      * @param fleschIndex readability index of the description
      * @return Education level required based on the readability index.
-     * @author Sahil
+     * @author Sahil_40192697
      * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
      */
     public static String getIndexLevel(int fleschIndex) {
@@ -111,7 +111,7 @@ public class DescriptionUtil {
      * @return average of all the readability index as a float value
      * @throws ExecutionException
      * @throws InterruptedException
-     * @author Sahil
+     * @author Sahil_40192697
      * @see <a href="https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&sa=D&source=editors&ust=1647564305219750&usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa">Flesch Readability Index</a>
      */
     public static Double getAverageReadabilityIndex(List<Project> projects) throws ExecutionException, InterruptedException {

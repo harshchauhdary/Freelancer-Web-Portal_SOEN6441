@@ -28,7 +28,6 @@ public class UserUtil {
      * @see User
      * @see Project
      */
-
     public static User getUserFromJson(String response, WSClient ws, SyncCacheApi cache) throws ParseException, IOException, ExecutionException, InterruptedException {
         JSONParser parser=new JSONParser();
         JSONObject jObj = (JSONObject) parser.parse(response);

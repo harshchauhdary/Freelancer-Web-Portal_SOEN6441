@@ -8,6 +8,10 @@ import java.util.List;
 
 public class ProjectTest extends TestCase {
 
+    /**
+     * Test method to check the getter and setter methods of getSkills in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
     public void testGetSkills() {
         List<Job> j = new ArrayList<>();
         Job j1 = new Job(3,"PHP");
@@ -19,18 +23,10 @@ public class ProjectTest extends TestCase {
         assertEquals(j,p.getSkills());
     }
 
-    public void testSetSkills() {
-        List<Job> j = new ArrayList<>();
-        Job j1 = new Job(3,"PHP");
-        Job j2 = new Job(17,"Web");
-        j.add(j1);
-        j.add(j2);
-        Project p = new Project();
-        p.setSkills(j);
-        assertEquals(p.getSkills(),j);
-
-    }
-
+    /**
+     * Test method to check the getter and setter methods of getFglIndex in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
     public void testGetFkglIndex() {
         Project p = new Project();
         p.setFkglIndex(80);
@@ -39,7 +35,10 @@ public class ProjectTest extends TestCase {
     }
 
 
-
+    /**
+     * Test method to check the getter and setter methods of getTimeSubmitted in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
     public void testGetTimeSubmitted() {
         Project p = new Project();
         Date d = new Date(2011 / 10);
@@ -47,7 +46,10 @@ public class ProjectTest extends TestCase {
         assertEquals(d,p.getTimeSubmitted());
     }
 
-
+    /**
+     * Test method to check the getter and setter methods of getTitle in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
 
     public void testGetTitle() {
         Project p = new Project();
@@ -57,7 +59,10 @@ public class ProjectTest extends TestCase {
 
     }
 
-
+    /**
+     * Test method to check the getter and setter methods of getOwnerID in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
 
     public void testGetOwnerID() {
         Project p = new Project();
@@ -67,7 +72,10 @@ public class ProjectTest extends TestCase {
     }
 
 
-
+    /**
+     * Test method to check the getter and setter methods of getType in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
 
     public void testGetType() {
         Project p = new Project();
@@ -75,23 +83,40 @@ public class ProjectTest extends TestCase {
         assertEquals("fixed",p.getType());
     }
 
+    /**
+     * Test method to check the getter and setter methods of getID in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
     public void testGetId() {
         Project p = new Project();
         p.setId(12345);
         assertEquals(12345,p.getId());
     }
 
+    /**
+     * Test method to check the getter and setter methods of getDesc in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
     public void testGetDesc() {
         Project p = new Project();
         p.setDesc("React Native Developer");
         assertEquals("React Native Developer", p.getDesc());
     }
 
+    /**
+     * Test method to check the getter and setter methods of getReadabilityIndex in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
     public void testGetReadabilityIndex() {
         Project p = new Project();
         p.setReadabilityIndex(70);
         assertEquals(70,p.getReadabilityIndex());
     }
+
+    /**
+     * Test method to check the getter and setter methods of getEducationLevel in Project.java model
+     * uses the setter to pass an argument and compares it with actual value using getter, through assertEquals
+     */
 
     public void testGetEducationLevel() {
 

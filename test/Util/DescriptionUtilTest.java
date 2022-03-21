@@ -1,7 +1,6 @@
 package Util;
 import static org.junit.Assert.*;
 
-import jdk.nashorn.internal.runtime.PrototypeObject;
 import model.Job;
 import model.Project;
 import org.junit.Test;
@@ -11,9 +10,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Test cases for Description util
+ * @author Sahil_40192697
+ */
 public class DescriptionUtilTest {
 
-
+    /**
+     * Test case for GetIndexLevel.It has 11 classes.It gives education level related to the id given to it.
+     */
     @Test
     public void getIndexLevelTest(){
         int[] inputClasses = new int[]{102,92,86,74,63,54,49,32,21,11,-89};
@@ -46,6 +51,10 @@ public class DescriptionUtilTest {
 
     }
 
+    /**
+     * Test case for getReadabilityIndex.It computes the readability index of all the projects present in the list
+     * and returns the list.
+     */
     @Test
     public void getReadabilityIndexTest(){
         List<Project> projects = new ArrayList<>();
@@ -59,7 +68,12 @@ public class DescriptionUtilTest {
         assertEquals(expectedLevel,result.get(0).getEducationLevel());
     }
 
-
+    /**
+     * Test case for getAverageReadabilityIndex.It computes the average of all readability index of projects.
+     * There are two cases for it. 1) List of size 0 ;2)List of size > 0
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @Test
     public void getAverageReadabilityIndexTest() throws ExecutionException, InterruptedException {
         List<Project> projects = new ArrayList<>();
@@ -73,8 +87,6 @@ public class DescriptionUtilTest {
         Double expectedResult1 = Double.valueOf(0);
 
         assertEquals(expectedResult,DescriptionUtil.getAverageReadabilityIndex(result));
-
-
         assertEquals(expectedResult1,DescriptionUtil.getAverageReadabilityIndex(result1));
 
     }
