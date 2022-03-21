@@ -24,7 +24,12 @@ import static play.test.Helpers.GET;
 import static play.test.Helpers.contentAsString;
 
 public class viewsTest extends WithApplication {
-
+    /**
+     * Test method for skills.scala.html
+     * Passes a project list while rendering the page.
+     * assertEquals is used to check the contentType of the page
+     * assertTrue is used to check that the page is rendered properly.
+     */
     @Test
     public void testSkills(){
         List<Project> projects = new ArrayList<Project>();
@@ -57,6 +62,12 @@ public class viewsTest extends WithApplication {
 
     }
     @Test
+    /**
+     * Test method to check the error.scala.html.
+     * A String argument is passed as error message.
+     * assertEquals is used to check the contentType of the page
+     * assertTrue is used to check the page rendering
+     */
     public void testError(){
         Content html = views.html.Home.error.render("No projects found");
         assertEquals("text/html", html.contentType());
@@ -66,6 +77,10 @@ public class viewsTest extends WithApplication {
 
     private FormFactory ff;
     private MessagesApi m;
+
+    /**
+     * Injection method to inject formFactory
+     */
     @Before
     public void injectFormFactory(){
 
@@ -75,6 +90,13 @@ public class viewsTest extends WithApplication {
     }
 
 
+    /**
+     * Test method for index.scala.html
+     * Passes a canva list, form, and play i18 message while rendering the page.
+     * assertEquals is used to check the contentType of the page
+     * assertTrue is used to check that the page is rendered properly.
+     * fakeRequest is used for mocking purposes.
+     */
     @Test
     public void testIndex(){
 
@@ -111,7 +133,12 @@ public class viewsTest extends WithApplication {
 
 
     }
-
+    /**
+     * Test method for user.scala.html
+     * Passes a user object while rendering the page.
+     * assertEquals is used to check the contentType of the page
+     * assertTrue is used to check that the page is rendered properly.
+     */
     @Test
     public void testUser(){
         User u=new User();
@@ -136,7 +163,12 @@ public class viewsTest extends WithApplication {
        assertTrue(contentAsString(html1).contains("User"));
 
     }
-
+    /**
+     * Test method for stats.scala.html
+     * Passes a linked hashmap of String type while rendering the page.
+     * assertEquals is used to check the contentType of the page
+     * assertTrue is used to check that the page is rendered properly.
+     */
     @Test
     public void testStats(){
         LinkedHashMap<String, Long> stats = new LinkedHashMap<String, Long>()  {{
