@@ -44,7 +44,9 @@ public class GeneralUtilTest extends WithApplication {
     }
 
     /**
-     *
+     * Testing method for the getJsonResponseFromUrl.
+     * Uses a params HashMap to test the method.
+     * Uses assertTrue to show correct response.
      * @throws Exception
      */
     @Test
@@ -65,6 +67,13 @@ public class GeneralUtilTest extends WithApplication {
         assertTrue(response2.contains("status\":\"success"));
 
     }
+
+    /**
+     * Testing method for getProjectsFromJson
+     * Gets a project from a JSon File, stored in resources and compares with a Project list created in the method.
+     * assertEquals is used to compare the various attributes of 2 lists.
+     * @throws Exception
+     */
 
     @Test
     public void testGetProjectsFromJson() throws Exception {
@@ -92,7 +101,12 @@ public class GeneralUtilTest extends WithApplication {
 
     }
 
-
+    /**
+     * Test method for getDescription from Json
+     * Uses a Json file stored in resources folder, and get preview description in list format.
+     * compares the obtained list with a list created in the method to ensure correctness.
+     * @throws Exception
+     */
     @Test
     public void testGetDescriptionFromJson() throws Exception{
         String json = getJsonFileAsString(File.separator + "test" + File.separator + "resources" + File.separator + "projects.json");
@@ -102,6 +116,16 @@ public class GeneralUtilTest extends WithApplication {
         assertEquals(GeneralUtil.getDescriptionFromJson(json), l);
     }
 
+    /**
+     * Test method for getUserFromJson
+     * Uses mockito for mocking the api accessing
+     * Compares the attributes of 2 Users, one obtained from the Mock, and one created in the method.
+     * Uses assertEquals for comparison and to ensure integrity.
+     * @throws IOException
+     * @throws ParseException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @Test
     public void testGetUserFromJson() throws IOException, ParseException, ExecutionException, InterruptedException {
         String url="https://www.freelancer.com/api/projects/0.1/projects";
@@ -143,6 +167,11 @@ public class GeneralUtilTest extends WithApplication {
 
     }
 
+    /**
+     * Test method for generateID method.
+     * uses a hashmap of String type to ensure that unique IDs are generated
+     * Uses assertFalse for that purpose
+     */
     @Test
     public void testGenerateId() {
         Map<String, String> h = new HashMap<String, String>();
@@ -152,6 +181,13 @@ public class GeneralUtilTest extends WithApplication {
         assertFalse(h.containsKey(id));
     }
 
+    /**
+     * Custom created method to get Json file in String format.
+     * Takes path in String type, and returns String of Json file.
+     * @param path path of the file
+     * @return Json file in String format
+     * @throws IOException
+     */
     public static String getJsonFileAsString(String path) throws IOException {
         String filePath = new File("").getAbsolutePath();
         byte[] encoded = Files.readAllBytes(Paths.get(filePath.concat(path)));
