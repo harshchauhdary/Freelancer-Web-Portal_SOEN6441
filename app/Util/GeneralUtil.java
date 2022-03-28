@@ -72,7 +72,6 @@ public class GeneralUtil {
         }
         Optional<String> r = cache.get(fullURl);
         if(r.isPresent()){
-            System.out.println("hello");
            return r.get();
         }
 

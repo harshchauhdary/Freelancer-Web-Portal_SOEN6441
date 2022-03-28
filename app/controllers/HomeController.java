@@ -108,6 +108,7 @@ public class HomeController extends Controller {
     public Result home(Http.Request request) throws IOException, ExecutionException, InterruptedException, ParseException {
         Form<Query> queryForm = formFactory.form(Query.class);
         Query q = queryForm.bindFromRequest(request).get();
+        if(q.getQuery().equals("")) {return ok(views.html.Home.error.render("No input string found"));}
         String url = "https://www.freelancer.com/api/projects/0.1/projects/active/";
         HashMap<String, String> params = new HashMap<>();
         params.put("query", q.getQuery());
@@ -127,7 +128,6 @@ public class HomeController extends Controller {
             return ok(views.html.Home.error.render("no user found"));
         }
         List<Canva> clist = this.browsers.get(user.get());
-
         boolean checkIfPresent = clist.stream().map(Canva::getTitle).anyMatch(r -> r.equals(c.getTitle()));
 
         if(checkIfPresent){

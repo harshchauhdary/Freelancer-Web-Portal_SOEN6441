@@ -3,10 +3,12 @@ package controllers;
 import Util.DescriptionUtil;
 import Util.UserUtil;
 import controllers.HomeController;
+import model.Canva;
 import model.Job;
 import model.Project;
 import model.User;
 import org.junit.Before;
+import org.mockito.Mock;
 import play.cache.SyncCacheApi;
 import play.libs.ws.WSClient;
 import Util.GeneralUtil;
@@ -93,6 +95,18 @@ public class HomeControllerTest extends WithApplication {
         try (MockedStatic<GeneralUtil> utilities = Mockito.mockStatic(GeneralUtil.class)) {
             try (MockedStatic<DescriptionUtil> utilities2 = Mockito.mockStatic(DescriptionUtil.class)) {
                 utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, params, ws, cache))
+                        .thenReturn("");
+
+                RequestBuilder request = Helpers.fakeRequest().method(POST).uri("/");
+                Result result = route(app, request);
+                assertEquals(OK, result.status());
+
+            }
+        }
+
+        try (MockedStatic<GeneralUtil> utilities = Mockito.mockStatic(GeneralUtil.class)) {
+            try (MockedStatic<DescriptionUtil> utilities2 = Mockito.mockStatic(DescriptionUtil.class)) {
+                utilities.when(() -> GeneralUtil.getJsonResponseFromUrl(url, params, ws, cache))
                         .thenReturn(json);
                 utilities.when(() -> GeneralUtil.getProjectsFromJson(json))
                         .thenReturn(projects);
@@ -108,6 +122,7 @@ public class HomeControllerTest extends WithApplication {
                         .uri("/");
                 request1.session("user","hdalkhdlkjdla");
                 Result result1 = route(app, request1);
+                assertEquals(OK, result.status());
 
                 Http.RequestBuilder request2 = new Http.RequestBuilder()
                         .method(POST)
