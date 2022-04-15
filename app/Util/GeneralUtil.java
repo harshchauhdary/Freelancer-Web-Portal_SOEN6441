@@ -71,7 +71,9 @@ public class GeneralUtil {
             fullURl = url;
         }
         Optional<String> r = cache.get(fullURl);
+        System.out.println("sdaw");
         if(r.isPresent()){
+
            return r.get();
         }
 
@@ -172,4 +174,6 @@ public class GeneralUtil {
         }
         return id.toString();
     }
+
+
 }

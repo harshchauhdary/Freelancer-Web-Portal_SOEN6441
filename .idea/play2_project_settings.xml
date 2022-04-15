@@ -10,25 +10,11 @@
             </ProjectSettingsEntry>
           </value>
         </entry>
-        <entry key="SOEN_BHMS">
-          <value>
-            <ProjectSettingsEntry>
-              <option name="playDistrPath" value="$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/typesafe/play/play_2.13/2.8.13/play_2.13-2.8.13.jar" />
-            </ProjectSettingsEntry>
-          </value>
-        </entry>
-        <entry key="play-java-hello-world-tutorial">
-          <value>
-            <ProjectSettingsEntry>
-              <option name="playDistrPath" value="$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/typesafe/play/play_2.13/2.8.13/play_2.13-2.8.13.jar" />
-            </ProjectSettingsEntry>
-          </value>
-        </entry>
         <entry key="root">
           <value>
             <ProjectSettingsEntry>
-              <option name="sourceDir" value="C:\Users\hrshc\Downloads\SOEN_BHMS-master\SOEN_BHMS\app" />
-              <option name="confDir" value="C:\Users\Dell\Desktop\CONCORDIA\COMP 16\Assignment_3\SOEN_BHMS\app" />
+              <option name="sourceDir" value="C:\Users\Dell\Desktop\SOEN_BHMS\app" />
+              <option name="confDir" value="C:\Users\hrshc\Desktop\SOEN_BHMS\SOEN_BHMS\app" />
               <option name="templateImports">
                 <list>
                   <option value="_root_.play.twirl.api.TwirlFeatureImports._" />
@@ -58,7 +44,7 @@
                   <option value="play.libs.F" />
                 </list>
               </option>
-              <option name="uri" value="/C:/Users/Dell/Desktop/CONCORDIA/COMP%2016/Assignment_3/SOEN_BHMS" />
+              <option name="uri" value="/C:/Users/hrshc/Desktop/SOEN_BHMS/SOEN_BHMS" />
             </ProjectSettingsEntry>
           </value>
         </entry>

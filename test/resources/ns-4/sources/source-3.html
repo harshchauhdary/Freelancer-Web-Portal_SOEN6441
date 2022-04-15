@@ -1,0 +1,358 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Project</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model</a>
+</div>
+
+<h1>Coverage Summary for Class: Project (model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Project</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package model;
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import java.util.*;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * Represents the project entity abtained from the freelancer api
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * @author Sahil_40192697 Munj
+<i class="no-highlight">11</i>&nbsp; */
+<i class="no-highlight">12</i>&nbsp;public class Project {
+<i class="no-highlight">13</i>&nbsp;    /**
+<i class="no-highlight">14</i>&nbsp;     * Id of project
+<i class="no-highlight">15</i>&nbsp;     */
+<i class="no-highlight">16</i>&nbsp;    private long id;
+<i class="no-highlight">17</i>&nbsp;    /**
+<i class="no-highlight">18</i>&nbsp;     * Description of project
+<i class="no-highlight">19</i>&nbsp;     */
+<i class="no-highlight">20</i>&nbsp;    private String description;
+<i class="no-highlight">21</i>&nbsp;    /**
+<i class="no-highlight">22</i>&nbsp;     * Readability Index of projects Description
+<i class="no-highlight">23</i>&nbsp;     *
+<i class="no-highlight">24</i>&nbsp;     * @see &lt;a href=&quot;https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&amp;sa=D&amp;source=editors&amp;ust=1647564305219750&amp;usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa&quot;&gt;Flesch Readability Index&lt;/a&gt;
+<i class="no-highlight">25</i>&nbsp;     */
+<i class="no-highlight">26</i>&nbsp;    private int readabilityIndex;
+<i class="no-highlight">27</i>&nbsp;    /**
+<i class="no-highlight">28</i>&nbsp;     * Education level required for user to understand the project description
+<i class="no-highlight">29</i>&nbsp;     * @see &lt;a href=&quot;https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&amp;sa=D&amp;source=editors&amp;ust=1647564305219750&amp;usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa&quot;&gt;Flesch Readability Index&lt;/a&gt;
+<i class="no-highlight">30</i>&nbsp;     */
+<i class="no-highlight">31</i>&nbsp;    private String educationLevel;
+<i class="no-highlight">32</i>&nbsp;    /**
+<i class="no-highlight">33</i>&nbsp;     * List of skills required for the job
+<i class="no-highlight">34</i>&nbsp;     * @see Job
+<i class="no-highlight">35</i>&nbsp;     */
+<i class="no-highlight">36</i>&nbsp;    private List&lt;Job&gt; skills;
+<i class="no-highlight">37</i>&nbsp;    /**
+<i class="no-highlight">38</i>&nbsp;     * Id of the owner who created the project
+<i class="no-highlight">39</i>&nbsp;     */
+<i class="no-highlight">40</i>&nbsp;    private long ownerID;
+<i class="no-highlight">41</i>&nbsp;    /**
+<i class="no-highlight">42</i>&nbsp;     * time when the project was submitted
+<i class="no-highlight">43</i>&nbsp;     */
+<i class="no-highlight">44</i>&nbsp;    private Date timeSubmitted;
+<i class="no-highlight">45</i>&nbsp;    /**
+<i class="no-highlight">46</i>&nbsp;     * FKGL index of the description of project
+<i class="no-highlight">47</i>&nbsp;     * @see &lt;a href=&quot;https://www.google.com/url?q=https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests&amp;sa=D&amp;source=editors&amp;ust=1647564305226163&amp;usg=AOvVaw3bwQ9Dl_E-VdqhapgkmnBC&quot;&gt;FKGL&lt;/a&gt;
+<i class="no-highlight">48</i>&nbsp;     */
+<i class="no-highlight">49</i>&nbsp;    private int fkglIndex;
+<i class="no-highlight">50</i>&nbsp;    /**
+<i class="no-highlight">51</i>&nbsp;     * Type of project
+<i class="no-highlight">52</i>&nbsp;     */
+<i class="no-highlight">53</i>&nbsp;    private String type;
+<i class="no-highlight">54</i>&nbsp;    /**
+<i class="no-highlight">55</i>&nbsp;     * Title of project
+<i class="no-highlight">56</i>&nbsp;     */
+<i class="no-highlight">57</i>&nbsp;    private String title;
+<i class="no-highlight">58</i>&nbsp;
+<b class="fc"><i class="no-highlight">59</i>&nbsp;    public &lt;E&gt; Project(int i, String s, String s1, int i1, ArrayList&lt;E&gt; es, String hourly) {</b>
+<i class="no-highlight">60</i>&nbsp;    }
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;    /**
+<i class="no-highlight">63</i>&nbsp;     *Getter Method to access the fkgl Index, of the type Int
+<i class="no-highlight">64</i>&nbsp;     * @see &lt;a href=&quot;https://www.google.com/url?q=https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests&amp;sa=D&amp;source=editors&amp;ust=1647564305226163&amp;usg=AOvVaw3bwQ9Dl_E-VdqhapgkmnBC&quot;&gt;FKGL&lt;/a&gt;
+<i class="no-highlight">65</i>&nbsp;     *@return fkglIndex
+<i class="no-highlight">66</i>&nbsp;     */
+<i class="no-highlight">67</i>&nbsp;    public int getFkglIndex() {
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        return fkglIndex;</b>
+<i class="no-highlight">69</i>&nbsp;    }
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    /**
+<i class="no-highlight">72</i>&nbsp;     * Setter Method, to assign the value to the fkgl Index.
+<i class="no-highlight">73</i>&nbsp;     * @see &lt;a href=&quot;https://www.google.com/url?q=https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests&amp;sa=D&amp;source=editors&amp;ust=1647564305226163&amp;usg=AOvVaw3bwQ9Dl_E-VdqhapgkmnBC&quot;&gt;FKGL&lt;/a&gt;
+<i class="no-highlight">74</i>&nbsp;     * @param fkglIndex Integer value which shall be assigned to the fkglIndex
+<i class="no-highlight">75</i>&nbsp;     */
+<i class="no-highlight">76</i>&nbsp;    public void setFkglIndex(int fkglIndex) {
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        this.fkglIndex = fkglIndex;</b>
+<i class="no-highlight">78</i>&nbsp;    }
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;    /**
+<i class="no-highlight">81</i>&nbsp;     * Getter Method, used to obtain the Time at which the project was Submitted.
+<i class="no-highlight">82</i>&nbsp;     * @return Submission Time of the project in the Date Format
+<i class="no-highlight">83</i>&nbsp;     */
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;    public Date getTimeSubmitted() {
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        return timeSubmitted;</b>
+<i class="no-highlight">87</i>&nbsp;    }
+<i class="no-highlight">88</i>&nbsp;
+<i class="no-highlight">89</i>&nbsp;    /**
+<i class="no-highlight">90</i>&nbsp;     * Setter Method used to assign the Time Submission value to the necessary parameter.
+<i class="no-highlight">91</i>&nbsp;     * @param timeSubmitted Submission Time of the project, in Date Format
+<i class="no-highlight">92</i>&nbsp;     */
+<i class="no-highlight">93</i>&nbsp;    public void setTimeSubmitted(Date timeSubmitted) {
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        this.timeSubmitted = timeSubmitted;</b>
+<i class="no-highlight">95</i>&nbsp;    }
+<i class="no-highlight">96</i>&nbsp;
+<i class="no-highlight">97</i>&nbsp;    /**
+<i class="no-highlight">98</i>&nbsp;     * Getter Method, used to obtain the Title of a Project
+<i class="no-highlight">99</i>&nbsp;     * @return Title of the project in String Format.
+<i class="no-highlight">100</i>&nbsp;     */
+<i class="no-highlight">101</i>&nbsp;    public String getTitle() {
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        return title;</b>
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;
+<i class="no-highlight">105</i>&nbsp;    /**
+<i class="no-highlight">106</i>&nbsp;     * Setter Method, used to assign the Title of aProject.
+<i class="no-highlight">107</i>&nbsp;     * @param title String containing the title value of the Project.
+<i class="no-highlight">108</i>&nbsp;     */
+<i class="no-highlight">109</i>&nbsp;
+<i class="no-highlight">110</i>&nbsp;    public void setTitle(String title) {
+<b class="fc"><i class="no-highlight">111</i>&nbsp;        this.title = title;</b>
+<i class="no-highlight">112</i>&nbsp;    }
+<i class="no-highlight">113</i>&nbsp;
+<i class="no-highlight">114</i>&nbsp;    /**
+<i class="no-highlight">115</i>&nbsp;     * Getter Method, used to obtain the List of Skills.
+<i class="no-highlight">116</i>&nbsp;     * @return The list of Skills, of type Job
+<i class="no-highlight">117</i>&nbsp;     */
+<i class="no-highlight">118</i>&nbsp;    public List&lt;Job&gt; getSkills() {
+<b class="fc"><i class="no-highlight">119</i>&nbsp;        return skills;</b>
+<i class="no-highlight">120</i>&nbsp;    }
+<i class="no-highlight">121</i>&nbsp;
+<i class="no-highlight">122</i>&nbsp;    /**
+<i class="no-highlight">123</i>&nbsp;     * Setter Method, used to assign value to the Skills List
+<i class="no-highlight">124</i>&nbsp;     * @param skills List of Skills, of type Job.
+<i class="no-highlight">125</i>&nbsp;     */
+<i class="no-highlight">126</i>&nbsp;    public void setSkills(List&lt;Job&gt; skills) {
+<b class="fc"><i class="no-highlight">127</i>&nbsp;        this.skills = skills;</b>
+<i class="no-highlight">128</i>&nbsp;    }
+<i class="no-highlight">129</i>&nbsp;
+<i class="no-highlight">130</i>&nbsp;
+<i class="no-highlight">131</i>&nbsp;    /**
+<i class="no-highlight">132</i>&nbsp;     * Getter Method, used to obtain the unique OwnerID of the Project Master.
+<i class="no-highlight">133</i>&nbsp;     * @return Unique ID of the Project Master, of type Long
+<i class="no-highlight">134</i>&nbsp;     */
+<i class="no-highlight">135</i>&nbsp;    public long getOwnerID() {
+<b class="fc"><i class="no-highlight">136</i>&nbsp;        return ownerID;</b>
+<i class="no-highlight">137</i>&nbsp;    }
+<i class="no-highlight">138</i>&nbsp;
+<i class="no-highlight">139</i>&nbsp;    /**
+<i class="no-highlight">140</i>&nbsp;     * Setter Method, used to assign value to OwnerID
+<i class="no-highlight">141</i>&nbsp;     * @param ownerID Unique ID of Project Master, of type Long
+<i class="no-highlight">142</i>&nbsp;     */
+<i class="no-highlight">143</i>&nbsp;    public void setOwnerID(long ownerID) {
+<b class="fc"><i class="no-highlight">144</i>&nbsp;        this.ownerID = ownerID;</b>
+<i class="no-highlight">145</i>&nbsp;    }
+<i class="no-highlight">146</i>&nbsp;
+<i class="no-highlight">147</i>&nbsp;    /**
+<i class="no-highlight">148</i>&nbsp;     * Blank Constructor of Project Class
+<i class="no-highlight">149</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">150</i>&nbsp;    public Project() {</b>
+<i class="no-highlight">151</i>&nbsp;    }
+<i class="no-highlight">152</i>&nbsp;
+<i class="no-highlight">153</i>&nbsp;    /**
+<i class="no-highlight">154</i>&nbsp;     * Getter Method, to obtain the type of the Project (Fixed/Hourly)
+<i class="no-highlight">155</i>&nbsp;     * @return type of the project
+<i class="no-highlight">156</i>&nbsp;     */
+<i class="no-highlight">157</i>&nbsp;
+<i class="no-highlight">158</i>&nbsp;    public String getType() {
+<b class="fc"><i class="no-highlight">159</i>&nbsp;        return type;</b>
+<i class="no-highlight">160</i>&nbsp;    }
+<i class="no-highlight">161</i>&nbsp;
+<i class="no-highlight">162</i>&nbsp;    /**
+<i class="no-highlight">163</i>&nbsp;     * Setter Method, used to assign value to type of the Project
+<i class="no-highlight">164</i>&nbsp;     * @param type value of type
+<i class="no-highlight">165</i>&nbsp;     */
+<i class="no-highlight">166</i>&nbsp;
+<i class="no-highlight">167</i>&nbsp;    public void setType(String type) {
+<b class="fc"><i class="no-highlight">168</i>&nbsp;        this.type = type;</b>
+<i class="no-highlight">169</i>&nbsp;    }
+<i class="no-highlight">170</i>&nbsp;
+<i class="no-highlight">171</i>&nbsp;    /**
+<i class="no-highlight">172</i>&nbsp;     * Creating project based on the given details
+<i class="no-highlight">173</i>&nbsp;     * @param id id of project
+<i class="no-highlight">174</i>&nbsp;     * @param description description of project
+<i class="no-highlight">175</i>&nbsp;     * @param title title of project
+<i class="no-highlight">176</i>&nbsp;     * @param timeSubmitted time when the project was submitted
+<i class="no-highlight">177</i>&nbsp;     * @param ownerID id of owner who created the project
+<i class="no-highlight">178</i>&nbsp;     * @param skills skills required for the project
+<i class="no-highlight">179</i>&nbsp;     * @param type type of project
+<i class="no-highlight">180</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">181</i>&nbsp;    public Project(long id, String description, String title, Date timeSubmitted, long ownerID, List&lt;Job&gt; skills, String type) {</b>
+<b class="fc"><i class="no-highlight">182</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i class="no-highlight">183</i>&nbsp;        this.description = description;</b>
+<b class="fc"><i class="no-highlight">184</i>&nbsp;        this.title = title;</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;        this.timeSubmitted = timeSubmitted;</b>
+<b class="fc"><i class="no-highlight">186</i>&nbsp;        this.skills = skills;</b>
+<b class="fc"><i class="no-highlight">187</i>&nbsp;        this.ownerID = ownerID;</b>
+<b class="fc"><i class="no-highlight">188</i>&nbsp;        this.type = type;</b>
+<i class="no-highlight">189</i>&nbsp;    }
+<i class="no-highlight">190</i>&nbsp;
+<i class="no-highlight">191</i>&nbsp;    /**
+<i class="no-highlight">192</i>&nbsp;     * Getter Method, used to obtain the Unique ID of the Project
+<i class="no-highlight">193</i>&nbsp;     * @return Unique ID of the project.
+<i class="no-highlight">194</i>&nbsp;     */
+<i class="no-highlight">195</i>&nbsp;    public long getId() {
+<b class="fc"><i class="no-highlight">196</i>&nbsp;        return this.id;</b>
+<i class="no-highlight">197</i>&nbsp;    } /**
+<i class="no-highlight">198</i>&nbsp;     * Setter Method, used to set the Unique ID of the Project
+<i class="no-highlight">199</i>&nbsp;     * @param id id to be set
+<i class="no-highlight">200</i>&nbsp;     */
+<i class="no-highlight">201</i>&nbsp;    public void setId(long id) {
+<b class="fc"><i class="no-highlight">202</i>&nbsp;         this.id = id;</b>
+<i class="no-highlight">203</i>&nbsp;    }
+<i class="no-highlight">204</i>&nbsp;    /**
+<i class="no-highlight">205</i>&nbsp;     * Getter Method, used to obtain the description of the project
+<i class="no-highlight">206</i>&nbsp;     * @return Description of the Project
+<i class="no-highlight">207</i>&nbsp;     */
+<i class="no-highlight">208</i>&nbsp;    public String getDesc() {
+<b class="fc"><i class="no-highlight">209</i>&nbsp;        return this.description;</b>
+<i class="no-highlight">210</i>&nbsp;    }
+<i class="no-highlight">211</i>&nbsp;    /**
+<i class="no-highlight">212</i>&nbsp;     * setter Method, used to set the description of the project
+<i class="no-highlight">213</i>&nbsp;     * @param desc description to be set
+<i class="no-highlight">214</i>&nbsp;     */
+<i class="no-highlight">215</i>&nbsp;    public void setDesc(String desc) {
+<b class="fc"><i class="no-highlight">216</i>&nbsp;         this.description = desc;</b>
+<i class="no-highlight">217</i>&nbsp;    }
+<i class="no-highlight">218</i>&nbsp;    /**
+<i class="no-highlight">219</i>&nbsp;     * Getter Method, used to obtain the readability Indices of the project
+<i class="no-highlight">220</i>&nbsp;     * @return Readability Index of the project
+<i class="no-highlight">221</i>&nbsp;     * @see &lt;a href=&quot;https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&amp;sa=D&amp;source=editors&amp;ust=1647564305219750&amp;usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa&quot;&gt;Flesch Readability Index&lt;/a&gt;
+<i class="no-highlight">222</i>&nbsp;     */
+<i class="no-highlight">223</i>&nbsp;    public int getReadabilityIndex() {
+<b class="fc"><i class="no-highlight">224</i>&nbsp;        return this.readabilityIndex;</b>
+<i class="no-highlight">225</i>&nbsp;    }
+<i class="no-highlight">226</i>&nbsp;
+<i class="no-highlight">227</i>&nbsp;    /**
+<i class="no-highlight">228</i>&nbsp;     * Setter Method, used to assign the Readability Indices of the projects
+<i class="no-highlight">229</i>&nbsp;     * @param index Readability Index of type int
+<i class="no-highlight">230</i>&nbsp;     * @see &lt;a href=&quot;https://www.google.com/url?q=http://users.csc.calpoly.edu/~jdalbey/305/Projects/FleschReadabilityProject.html&amp;sa=D&amp;source=editors&amp;ust=1647564305219750&amp;usg=AOvVaw0IOgagGnM1UmYzi7T4jVRa&quot;&gt;Flesch Readability Index&lt;/a&gt;
+<i class="no-highlight">231</i>&nbsp;     */
+<i class="no-highlight">232</i>&nbsp;    public void setReadabilityIndex(int index) {
+<b class="fc"><i class="no-highlight">233</i>&nbsp;        this.readabilityIndex = index;</b>
+<i class="no-highlight">234</i>&nbsp;    }
+<i class="no-highlight">235</i>&nbsp;
+<i class="no-highlight">236</i>&nbsp;    /**
+<i class="no-highlight">237</i>&nbsp;     * Setter Method, used to assign the education level required for the projects.
+<i class="no-highlight">238</i>&nbsp;     * @param level Education level of type String
+<i class="no-highlight">239</i>&nbsp;     */
+<i class="no-highlight">240</i>&nbsp;    public void setEducationLevel(String level) {
+<b class="fc"><i class="no-highlight">241</i>&nbsp;        this.educationLevel = level;</b>
+<i class="no-highlight">242</i>&nbsp;    }
+<i class="no-highlight">243</i>&nbsp;
+<i class="no-highlight">244</i>&nbsp;    /**
+<i class="no-highlight">245</i>&nbsp;     * Getter Method, used to obtain the education level required for the projects.
+<i class="no-highlight">246</i>&nbsp;     * @return Education level required for the project.
+<i class="no-highlight">247</i>&nbsp;     */
+<i class="no-highlight">248</i>&nbsp;    public String getEducationLevel() {
+<b class="fc"><i class="no-highlight">249</i>&nbsp;        return this.educationLevel;</b>
+<i class="no-highlight">250</i>&nbsp;    }
+<i class="no-highlight">251</i>&nbsp;
+<i class="no-highlight">252</i>&nbsp;
+<i class="no-highlight">253</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-28 19:20</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Job</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model</a>
+</div>
+
+<h1>Coverage Summary for Class: Job (model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Job</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;package model;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import org.json.simple.JSONArray;
+<i class="no-highlight">8</i>&nbsp;import org.json.simple.JSONObject;
+<i class="no-highlight">9</i>&nbsp;import org.json.simple.parser.JSONParser;
+<i class="no-highlight">10</i>&nbsp;import org.json.simple.parser.ParseException;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;import java.util.List;
+<i class="no-highlight">13</i>&nbsp;import java.util.concurrent.CompletableFuture;
+<i class="no-highlight">14</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">15</i>&nbsp;/**
+<i class="no-highlight">16</i>&nbsp; @author: Munj Bhavesh Nayak
+<i class="no-highlight">17</i>&nbsp; This class is utilized in obtaining all the Jobs&#39; names and their respective Job IDs, which are in
+<i class="no-highlight">18</i>&nbsp; turn stored in JSon File, which is then parsed using Job ID to select the required Jobs.
+<i class="no-highlight">19</i>&nbsp; */
+<i class="no-highlight">20</i>&nbsp;public class Job {
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;    private long job_id;
+<i class="no-highlight">23</i>&nbsp;    private String job_name;
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    /**
+<i class="no-highlight">26</i>&nbsp;     * Constructor of the Job Class, that initializes and creates the class&#39;s objects based on the
+<i class="no-highlight">27</i>&nbsp;     * parameters provided.
+<i class="no-highlight">28</i>&nbsp;     * @param job_id A long Integer which is used to uniquely identify a job
+<i class="no-highlight">29</i>&nbsp;     * @param job_name A String value, which is associated with the unique job ID. Signifies the name of the skill.
+<i class="no-highlight">30</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    public Job(long job_id, String job_name){</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        this.job_id = job_id;</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        this.job_name = job_name;</b>
+<i class="no-highlight">34</i>&nbsp;    }
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;    /**
+<i class="no-highlight">37</i>&nbsp;     * Constructor for Test case
+<i class="no-highlight">38</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    public Job() {</b>
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    /**
+<i class="no-highlight">44</i>&nbsp;     * Getter method used to access the Job_ID of a particular job.
+<i class="no-highlight">45</i>&nbsp;     * @return the job_id with type long
+<i class="no-highlight">46</i>&nbsp;     */
+<i class="no-highlight">47</i>&nbsp;    public long getJob_id() {
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        return job_id;</b>
+<i class="no-highlight">49</i>&nbsp;    }
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;    /**
+<i class="no-highlight">52</i>&nbsp;     * Setter Method to pass the necessary value to the Job_ID
+<i class="no-highlight">53</i>&nbsp;     * @param job_id A long integer used to uniquely identify the Jobs
+<i class="no-highlight">54</i>&nbsp;     */
+<i class="no-highlight">55</i>&nbsp;    public void setJob_id(long job_id) {
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        this.job_id = job_id;</b>
+<i class="no-highlight">57</i>&nbsp;    }
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;    /**
+<i class="no-highlight">60</i>&nbsp;     * Getter Method, used to access the Job Name.
+<i class="no-highlight">61</i>&nbsp;     * @return the Job name of the type String
+<i class="no-highlight">62</i>&nbsp;     */
+<i class="no-highlight">63</i>&nbsp;    public String getJob_name() {
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        return job_name;</b>
+<i class="no-highlight">65</i>&nbsp;    }
+<i class="no-highlight">66</i>&nbsp;
+<i class="no-highlight">67</i>&nbsp;    /**
+<i class="no-highlight">68</i>&nbsp;     * Setter Method, used to pass the necessary value to the Job Name
+<i class="no-highlight">69</i>&nbsp;     * @param job_name A String which contains the name associated with the unique Job ID
+<i class="no-highlight">70</i>&nbsp;     */
+<i class="no-highlight">71</i>&nbsp;    public void setJob_name(String job_name) {
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        this.job_name = job_name;</b>
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;
+<i class="no-highlight">77</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-28 19:20</div>
+</div>
+</body>
+</html>

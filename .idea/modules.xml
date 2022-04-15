@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Assignment1.iml" filepath="$PROJECT_DIR$/.idea/modules/Assignment1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Assignment1-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Assignment1-build.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play-java-hello-world-tutorial.iml" filepath="$PROJECT_DIR$/.idea/modules/play-java-hello-world-tutorial.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play-java-hello-world-tutorial-build.iml" filepath="$PROJECT_DIR$/.idea/modules/play-java-hello-world-tutorial-build.iml" />
     </modules>
   </component>
 </project>

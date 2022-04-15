@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Util</a>
+</div>
+
+<h1>Coverage Summary for Class: UserUtil (Util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.7%
+  </span>
+  <span class="absValue">
+    (29/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package Util;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import model.Project;
+<i class="no-highlight">4</i>&nbsp;import model.User;
+<i class="no-highlight">5</i>&nbsp;import org.json.simple.JSONObject;
+<i class="no-highlight">6</i>&nbsp;import org.json.simple.parser.JSONParser;
+<i class="no-highlight">7</i>&nbsp;import org.json.simple.parser.ParseException;
+<i class="no-highlight">8</i>&nbsp;import play.cache.SyncCacheApi;
+<i class="no-highlight">9</i>&nbsp;import play.libs.ws.WSClient;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;import java.io.IOException;
+<i class="no-highlight">12</i>&nbsp;import java.util.HashMap;
+<i class="no-highlight">13</i>&nbsp;import java.util.List;
+<i class="no-highlight">14</i>&nbsp;import java.util.concurrent.ExecutionException;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;import static Util.GeneralUtil.getJsonResponseFromUrl;
+<i class="no-highlight">17</i>&nbsp;import static Util.GeneralUtil.getProjectsFromJson;
+<i class="no-highlight">18</i>&nbsp;
+<b class="nc"><i class="no-highlight">19</i>&nbsp;public class UserUtil {</b>
+<i class="no-highlight">20</i>&nbsp;    /**
+<i class="no-highlight">21</i>&nbsp;     * This method provides user data which is obtained through response parameter, response parameter contains data which obtained directly from url
+<i class="no-highlight">22</i>&nbsp;     * @author Bhargav Bhutwala 40196468
+<i class="no-highlight">23</i>&nbsp;     * @param response user data in JSON form
+<i class="no-highlight">24</i>&nbsp;     * @param ws Wsclient to make a asynchronous request
+<i class="no-highlight">25</i>&nbsp;     * @return user object containing last 10 projects of user and user details like id, username...
+<i class="no-highlight">26</i>&nbsp;     * @throws ParseException Signals that an error has been reached unexpectedly while parsing
+<i class="no-highlight">27</i>&nbsp;     * @throws IOException thrown when an I/O error occurs
+<i class="no-highlight">28</i>&nbsp;     * @see User
+<i class="no-highlight">29</i>&nbsp;     * @see Project
+<i class="no-highlight">30</i>&nbsp;     */
+<i class="no-highlight">31</i>&nbsp;    public static User getUserFromJson(String response, WSClient ws, SyncCacheApi cache) throws ParseException, IOException, ExecutionException, InterruptedException {
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        JSONParser parser=new JSONParser();</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        JSONObject jObj = (JSONObject) parser.parse(response);</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        JSONObject jsonObject=(JSONObject) jObj.get(&quot;result&quot;);</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        JSONObject jsonObject1=(JSONObject) jsonObject.get(&quot;location&quot;);</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        JSONObject jsonObject2=(JSONObject)jsonObject1.get(&quot;country&quot;);</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        JSONObject jsonObject3=(JSONObject)jsonObject.get(&quot;status&quot;);</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        JSONObject jsonObject4=(JSONObject)jsonObject.get(&quot;primary_currency&quot;);</b>
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        String username= (String) jsonObject.get(&quot;username&quot;);</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        long id = (long) jsonObject.get(&quot;id&quot;);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        long reg_date=(long)jsonObject.get(&quot;registration_date&quot;);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        boolean limited_account=(boolean) jsonObject.get(&quot;limited_account&quot;);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        String display_name = (String) jsonObject.get(&quot;display_name&quot;);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        String role = (String) jsonObject.get(&quot;role&quot;);</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        String chosen_role=(String)jsonObject.get(&quot;chosen_role&quot;);</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        String country=(String)jsonObject2.get(&quot;name&quot;);</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        boolean email_verified=(boolean)jsonObject3.get(&quot;email_verified&quot;);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        String primary_currency=(String)jsonObject4.get(&quot;name&quot;);</b>
+<i class="no-highlight">51</i>&nbsp;
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        User user_obj=new User(id,username,display_name,role,reg_date,limited_account,chosen_role,country,email_verified,primary_currency);</b>
+<i class="no-highlight">53</i>&nbsp;
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        String url=&quot;https://www.freelancer.com/api/projects/0.1/projects&quot;;</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        HashMap&lt;String,String&gt; params = new HashMap&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        params.put(&quot;owners[]&quot;,Long.toString(id));</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        params.put(&quot;full_description&quot;,&quot;true&quot;);</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;        params.put(&quot;job_details&quot;,&quot;true&quot;);</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        params.put(&quot;limit&quot;,&quot;10&quot;);</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        String data=getJsonResponseFromUrl(url,params,ws,cache);</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        List&lt;Project&gt; projects=DescriptionUtil.getReadabilityIndex(getProjectsFromJson(data));</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        user_obj.setProjects(projects);</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        System.out.println(user_obj.getId());</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        return user_obj;</b>
+<i class="no-highlight">65</i>&nbsp;    }
+<i class="no-highlight">66</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-28 19:20</div>
+</div>
+</body>
+</html>

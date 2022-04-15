@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > index</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.Home</a>
+</div>
+
+<h1>Coverage Summary for Class: index (views.html.Home)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">index$</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (31/33)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (31/33)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@*
+<i class="no-highlight">2</i>&nbsp;* This template is called from the `index` template. This template
+<i class="no-highlight">3</i>&nbsp;* handles the rendering of the page header and body tags. It takes
+<i class="no-highlight">4</i>&nbsp;* two arguments, a `List[Project]` for all projects of the search query.
+<i class="no-highlight">5</i>&nbsp;* and &#39;Float&#39; value which is the average index of all 10 Projects
+<i class="no-highlight">6</i>&nbsp;*@
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;    @import model.Project
+<i class="no-highlight">9</i>&nbsp;    @import model.Job
+<i class="no-highlight">10</i>&nbsp;    @import model.Canva
+<i class="no-highlight">11</i>&nbsp;    @import model.Query
+<i class="no-highlight">12</i>&nbsp;    @import helper._
+<i class="no-highlight">13</i>&nbsp;    @(canvas:List[Canva])(queryForm : Form[Query])(implicit message: play.i18n.Messages)
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    &lt;html&gt;
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;        &lt;body&gt;
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;            @helper.form(action = routes.HomeController.home()){
+<i class="no-highlight">23</i>&nbsp;                @helper.inputText(queryForm(&quot;query&quot;))
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;                &lt;input type=&quot;submit&quot; value=&quot;create query&quot;/&gt;
+<i class="no-highlight">26</i>&nbsp;            }
+<i class="no-highlight">27</i>&nbsp;        &lt;br&gt;
+<i class="no-highlight">28</i>&nbsp;            @for(c &lt;- canvas){
+<b class="fc"><i class="no-highlight">29</i>&nbsp;            &lt;p&gt;</b>
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;        &lt;h1&gt;List of active 10 projects based on @c.getTitle()&lt;/h1&gt;&lt;br&gt;
+<i class="no-highlight">32</i>&nbsp;            &lt;b&gt;&lt;a href = &quot;@routes.HomeController.globalstats(c.getTitle())&quot;&gt;Global Stats for @c.getTitle()&lt;/a&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;            &lt;b&gt;Average Flesh Reading Ease Index: @c.getAverageIndex()&lt;/b&gt;&lt;br&gt;</b>
+<i class="no-highlight">34</i>&nbsp;            @for(p&lt;-c.getProjects()) {
+<i class="no-highlight">35</i>&nbsp;                &lt;p&gt;
+<i class="no-highlight">36</i>&nbsp;            &lt;li&gt;
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                OwnerID: &lt;a href = &quot;@routes.HomeController.user(p.getOwnerID().toString())&quot;&gt;@p.getOwnerID&lt;/a&gt;</b>
+<i class="no-highlight">38</i>&nbsp;                &lt;br&gt;&lt;br&gt; Time Submitted: @p.getTimeSubmitted()&lt;br&gt;&lt;br&gt;
+<i class="no-highlight">39</i>&nbsp;                Title: &lt;b&gt;@p.getTitle()&lt;/b&gt;&lt;br&gt;&lt;br&gt;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;                Type: @p.getType()&lt;br&gt;&lt;br&gt;</b>
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;                Description: @p.getDesc()&amp;nbsp
+<i class="no-highlight">43</i>&nbsp;                &lt;a href = &quot;@routes.HomeController.indistats(p.getDesc())&quot;&gt;Stats&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+<i class="no-highlight">44</i>&nbsp;                Flesh Reading Ease Index: &lt;b&gt;@p.getReadabilityIndex()&lt;/b&gt; &amp;nbsp &amp;nbsp Education Level: &lt;b&gt;@p.getEducationLevel()&lt;/b&gt;
+<i class="no-highlight">45</i>&nbsp;                &amp;nbsp &amp;nbsp FKGL: &lt;b&gt;@p.getFkglIndex()&lt;/b&gt;&lt;br&gt;&lt;br&gt;
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                Required Skills: &amp;nbsp</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;</b>
+<i class="no-highlight">48</i>&nbsp;                @for(j &lt;- p.getSkills()){
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                    &lt;a  href = &quot;@routes.HomeController.skills(j.getJob_id().toString())&quot; &gt;@j.getJob_name()&lt;/a&gt; &amp;nbsp &amp;nbsp</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                }</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            &lt;/li&gt;</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                &lt;br&gt;</b>
+<i class="no-highlight">54</i>&nbsp;                }}
+<b class="fc"><i class="no-highlight">55</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        &lt;/body&gt;</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;    &lt;/html&gt;</b>
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-28 19:20</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+@(request: play.mvc.Http.Request, title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>@title</title>
+        <script  src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+        <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
+        <style>
+                h4:empty::before {content: "No data"}
+
+                #form-center {
+                    width:400px;
+                    margin: 0 auto;
+                }
+        </style>
+    </head>
+    <body id="home" data-ws-url="@routes.AController.ws.webSocketURL(request)">
+        @* And here's where we render the `Html` object containing
+        * the page content. *@
+        @content
+    </body>
+</html>

@@ -1,0 +1,33 @@
+@*
+* This template is called from the `index` template. This template
+* handles the rendering of the page header and body tags. It takes
+* two arguments, a `List[Project]` for all projects of the search query.
+* and 'Float' value which is the average index of all 10 Projects
+*@
+@import model.Project
+@import model.Job
+@import model.Canva
+@import model.Query
+@import helper._
+@import views.html.main
+@(request: play.mvc.Http.Request)(canvas: List[Canva])
+
+
+@main(request, "Welcome to Play") {
+
+    <div id="search-page" class="container">
+
+        <form id="searchForm" method="post">
+            <input type="text" class="input-lg" name="query" id="query" size="105" value="">
+            <button type="submit">  Search</button>
+        </form>
+
+
+        <br>
+    </div>
+
+    <div id="page-result">
+
+    </div>
+
+}

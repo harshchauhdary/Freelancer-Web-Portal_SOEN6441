@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > stats</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.Home</a>
+</div>
+
+<h1>Coverage Summary for Class: stats (views.html.Home)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">stats$</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (32/34)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (32/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@*
+<i class="no-highlight">2</i>&nbsp;*   Scala template for Word Statistics page
+<i class="no-highlight">3</i>&nbsp;*   Takes a LinkedHashMap[String,Long] containing words and their frequency as an argument and
+<i class="no-highlight">4</i>&nbsp;*   displays them on the webpage.
+<i class="no-highlight">5</i>&nbsp;*@
+<i class="no-highlight">6</i>&nbsp;@(stats : LinkedHashMap[String,java.lang.Long])
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;&lt;html&gt;
+<i class="no-highlight">9</i>&nbsp;    &lt;style&gt;
+<i class="no-highlight">10</i>&nbsp;            body{font-family: Arial, Helvetica, sans-serif;}
+<i class="no-highlight">11</i>&nbsp;            .title{
+<i class="no-highlight">12</i>&nbsp;                display: flex;
+<i class="no-highlight">13</i>&nbsp;                justify-content: center;
+<i class="no-highlight">14</i>&nbsp;            }
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;            button {
+<i class="no-highlight">17</i>&nbsp;                /*background-color: #008CBA;*/
+<i class="no-highlight">18</i>&nbsp;                border-radius: 4px;
+<i class="no-highlight">19</i>&nbsp;                margin: 25px;
+<i class="no-highlight">20</i>&nbsp;                padding: 6px;
+<i class="no-highlight">21</i>&nbsp;                font-size: 14px;
+<i class="no-highlight">22</i>&nbsp;                /*border: none;*/
+<i class="no-highlight">23</i>&nbsp;                /*color: white;*/
+<b class="fc"><i class="no-highlight">24</i>&nbsp;                text-align: center;</b>
+<i class="no-highlight">25</i>&nbsp;                text-decoration: none;
+<i class="no-highlight">26</i>&nbsp;                cursor: pointer;
+<i class="no-highlight">27</i>&nbsp;            }
+<i class="no-highlight">28</i>&nbsp;            h1 {
+<i class="no-highlight">29</i>&nbsp;                text-align: center;
+<i class="no-highlight">30</i>&nbsp;                margin-right: 20px;
+<i class="no-highlight">31</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">32</i>&nbsp;            table {</b>
+<i class="no-highlight">33</i>&nbsp;                margin-left: auto;
+<i class="no-highlight">34</i>&nbsp;                margin-right: auto;
+<i class="no-highlight">35</i>&nbsp;                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            }</b>
+<i class="no-highlight">37</i>&nbsp;            tr:nth-of-type(even) {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;                background-color: #f3f3f3;</b>
+<i class="no-highlight">39</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            td {</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;                padding: 10px 15px;</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;                text-align: center;</b>
+<i class="no-highlight">43</i>&nbsp;                width: 60%;
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            }</b>
+<i class="no-highlight">45</i>&nbsp;    &lt;/style&gt;
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    &lt;body&gt;</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;            &lt;div class=&quot;title&quot;&gt;</b>
+<i class="no-highlight">48</i>&nbsp;                &lt;h1&gt; Word Statistics&lt;/h1&gt;
+<i class="no-highlight">49</i>&nbsp;                &lt;button class=&quot;button&quot; onclick=&quot;window.location.href=&#39;@routes.HomeController.index&#39;;&quot;&gt;Home&lt;/button&gt;
+<i class="no-highlight">50</i>&nbsp;            &lt;/div&gt;
+<i class="no-highlight">51</i>&nbsp;            &lt;table&gt;
+<i class="no-highlight">52</i>&nbsp;                &lt;tr&gt;
+<i class="no-highlight">53</i>&nbsp;                    &lt;td&gt;&lt;b&gt;Word&lt;/b&gt;&lt;/td&gt;
+<i class="no-highlight">54</i>&nbsp;                    &lt;td&gt;&lt;b&gt;Count&lt;/b&gt;&lt;/td&gt;
+<i class="no-highlight">55</i>&nbsp;                &lt;/tr&gt;
+<i class="no-highlight">56</i>&nbsp;            @for((key, value) &lt;- stats){
+<b class="fc"><i class="no-highlight">57</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;                &lt;tr&gt;</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;                    &lt;td&gt;@key&lt;/td&gt;</b>
+<i class="no-highlight">60</i>&nbsp;                    &lt;td&gt;@value&lt;/td&gt;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;                &lt;/tr&gt;</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            }</b>
+<i class="no-highlight">64</i>&nbsp;            &lt;/table&gt;
+<i class="no-highlight">65</i>&nbsp;    &lt;/body&gt;
+<b class="fc"><i class="no-highlight">66</i>&nbsp;&lt;/html&gt;</b>
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-28 19:20</div>
+</div>
+</body>
+</html>
